@@ -1,0 +1,29 @@
+Ape Antibiotics
+
+Character Design Document
+
+Character Name: Theodore
+
+Overview: 
+
+- Role: Heavy
+- Affiliation: Gorilla
+- Background Story: Lovable, lazy
+
+Visual Design: 
+- Concept Art: Gorilla
+- Physical Description: Heavy and large
+
+Movement Abilities:
+- Big jump
+- Wall Running
+
+Combat Abilities:
+- Primary Weapon: Hand slam 
+		[Giant downward doubel fisted strike, only activates upon touching ground]
+- Ability 1: Double Jump 
+		[Really large second jump after the first, think winston jump]
+- Ability 2: Aerial ground dash
+		[Must be in the air, can only be directed at the ground]
+- Ultimate Ability: Nuke 
+		[Unholy grand slam from the heavens]

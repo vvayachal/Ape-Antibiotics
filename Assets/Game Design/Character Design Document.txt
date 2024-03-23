@@ -1,0 +1,21 @@
+Glory
+
+Character Design Document
+
+Character Name: [Character Name] (based on their monkey's inner thoughts/personality which is gauged based on their abilities and playstyle)
+
+Overview: 
+
+- Role: [Heavy/Medium/Light]
+- Affiliation: [Monkey species]
+- Background Story: [Personality]
+
+Visual Design: 
+- Concept Art: [Visual concepts and reference images for character's appearance]
+- Physical Description: [Character's appearance, height, weight, clothing, distinguishing features]
+
+Abilities:
+- Primary Weapon: [Main attack method, including range, damage, and special properties.]
+- Ability 1: [Ability Name] [First unique ability, its effect, cooldown, additional details.]
+- Ability 2: [Ability Name] [Second unique ability, its effect, cooldown, additional details.]
+- Ultimate Ability: [Ultimate Name] [Ultimate ability description, powerful effect, cooldown, additional details.]

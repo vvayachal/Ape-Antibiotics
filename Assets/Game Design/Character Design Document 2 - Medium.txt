@@ -1,0 +1,29 @@
+Ape Antibiotics
+
+Character Design Document
+
+Character Name: Macrimoni
+
+Overview: 
+
+- Role: Medium
+- Affiliation: Proboscis Monkey
+- Background Story: Sensible, smart
+
+Visual Design: 
+- Concept Art: Proboscis Monkey
+- Physical Description: Tall and long
+
+Movement Abilities:
+- Dash
+- Grapple hook
+
+Combat Abilities:
+- Primary Weapon: Roundhouse Kick
+		[Either in the air or on ground]
+- Ability 1: Flight 
+		[Gain aerial movement for short time, very fast forward momentum, sort of like echo flight]
+- Ability 2: Grapple Hook 
+		[as similar to pathfinder and halo infinite grapple hooks as possible]
+- Ultimate Ability: Space kick
+		[Horizontal massive kick]

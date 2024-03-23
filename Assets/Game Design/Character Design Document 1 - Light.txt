@@ -1,0 +1,28 @@
+Ape Antibiotics
+
+Character Design Document
+
+Character Name: Archibald
+
+Overview: 
+
+- Role: Light
+- Affiliation: Chimpanzee
+- Background Story: Chaotic, fun
+
+Visual Design: 
+- Concept Art: Chimpanzee
+- Physical Description: Small and light
+
+Movement Abilities:
+- Double jump
+- Dash
+- Wall run
+
+Combat Abilities:
+- Primary Weapon: Cannonball
+		[Use entire body to create shockwave at point of impact]
+- Ability 1: Rocochet  
+		[Ricochet directly off a surface using entire body with double the force that went going into the ricochet]
+- Ultimate Ability: Inifidash 
+		[Unlimited fully charged dash]
