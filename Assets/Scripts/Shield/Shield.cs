@@ -10,7 +10,7 @@ public class Shield : MonoBehaviour
     private ShieldHealth shield;
     public float shieldHealth;
 
-    public bool cracked;
+    public bool cracked => shieldHealth <= 0;
 
     [Header("Keybinds")]
     [SerializeField] KeyCode inflictDamageKey = KeyCode.T;
@@ -25,33 +25,20 @@ public class Shield : MonoBehaviour
         // Update shield health
         shield.shieldHealth = shieldHealth;
 
-        ShieldCrack();
-
         SelfInflictDamage();
     }
 
-    private void ShieldCrack()
-    {
-       if (shieldHealth > 0)
-       {
-           cracked = false;
-       }
-       else
-       {
-           cracked = true;
-       }
-
-       if (cracked)
-        {
-            // Play some crack animation
-        }
-    }
 
     public void TakeDamage(float damage)
     {
         if (!cracked)
         {
             shieldHealth -= damage;
+        }
+
+        if (cracked)
+        {
+            // Play some crack animation
         }
     }
 
