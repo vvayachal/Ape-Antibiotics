@@ -173,12 +173,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isGrounded)
         {
-            Debug.Log("Grounded");
             rb.drag = groundDrag;
         }
         else
         {
-            Debug.Log("Not grounded");
             rb.drag = airDrag;
         }
     }

@@ -38,7 +38,7 @@ public class Shield : MonoBehaviour
 
         if (cracked)
         {
-            // Play some crack animation
+            Debug.Log("Shield Cracked");
         }
     }
 
