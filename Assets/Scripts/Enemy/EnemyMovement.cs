@@ -7,6 +7,7 @@ public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] Transform target;
     NavMeshAgent navMeshAgent;
+    Animator animator;
 
     [SerializeField] float chaseRange = 5f;
     // Use Mathf.Infinity so that enemyAI
@@ -18,6 +19,7 @@ public class EnemyMovement : MonoBehaviour
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -62,11 +64,21 @@ public class EnemyMovement : MonoBehaviour
         if (navMeshAgent.enabled)
         {
             navMeshAgent.SetDestination(target.position);
+            animator.SetBool("attack", false);
         }
     }
 
     void AttackTarget()
     {
+        animator.SetBool("attack", true);
+        Debug.Log($"{this.name} has attacked {target.name}");
+    }
+
+    void AttackHitEvent()
+    {
+        if (target == null) { return; }
+
+        target.GetComponentInParent<Shield>().TakeDamage(10f);
         Debug.Log($"{this.name} has attacked {target.name}");
     }
 
