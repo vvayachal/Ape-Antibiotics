@@ -14,9 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float airMultiplier = 0.4f;
     [SerializeField] Text speedText;
     private float currentSpeed;
-    // public float boostFactor = 50f;
-    //private bool keepMomentum;
-
+   
     [Header("Sprinting")]
     [SerializeField] float walkSpeed = 4f;
     [SerializeField] float sprintSpeed = 6f;
@@ -141,33 +139,7 @@ public class PlayerMovement : MonoBehaviour
         {
             speed = Mathf.Lerp(speed, walkSpeed, acceleration * Time.deltaTime);
         }
-
-        //if (currentSpeed >= 20 && !keepMomentum)
-        //{
-        //    keepMomentum = true;
-        //    StartCoroutine(SmoothlyLerpMoveSpeed());
-        //}
     }
-
-    //private IEnumerator SmoothlyLerpMoveSpeed()
-    //{
-    //    //smoothly lerp movement speed back to normal
-    //    float time = 0;
-    //    float difference = Mathf.Abs(speed - currentSpeed);
-    //    float startValue = currentSpeed;
-
-    //    while (time < difference)
-    //    {
-    //        speed = Mathf.Lerp(startValue, sprintSpeed, time / difference);
-
-    //        time += Time.deltaTime * boostFactor;
-
-    //        yield return null;
-    //    }
-
-    //    speed = walkSpeed;
-    //    keepMomentum = false;
-    //}
 
     void ControlDrag()
     {

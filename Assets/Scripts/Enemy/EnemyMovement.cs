@@ -37,7 +37,7 @@ public class EnemyMovement : MonoBehaviour
 
     void EngageTarget()
     {
-        FaceTarget();
+        //FaceTarget();
         if (distanceToTarget >= navMeshAgent.stoppingDistance)
         {
             ChaseTarget();
@@ -71,7 +71,6 @@ public class EnemyMovement : MonoBehaviour
     void AttackTarget()
     {
         animator.SetBool("attack", true);
-        Debug.Log($"{this.name} has attacked {target.name}");
     }
 
     void AttackHitEvent()
