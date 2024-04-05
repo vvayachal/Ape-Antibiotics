@@ -59,6 +59,9 @@ public class Punch : MonoBehaviour
     {
         if (attackPoint == null) return;
 
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+        if (attackPoint.parent.gameObject.activeSelf)
+        {
+            Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+        }
     }
 }
