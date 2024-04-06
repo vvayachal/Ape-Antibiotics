@@ -27,6 +27,8 @@ public class Grappling : MonoBehaviour
 
     private bool grappling;
 
+    private RaycastHit savedHit;
+
     void Start()
     {
         pm = GetComponent<PlayerMovement>();
@@ -44,7 +46,10 @@ public class Grappling : MonoBehaviour
             grapplingCdTimer -= Time.deltaTime;
         }
 
-        lr.gameObject.transform.localRotation = new Quaternion(cameraHolder.transform.localRotation.x, lr.gameObject.transform.localRotation.y, lr.gameObject.transform.localRotation.z, lr.gameObject.transform.localRotation.w);
+        if(grappling){
+            setGrappleRope(savedHit);
+        }
+        //lr.gameObject.transform.localRotation = new Quaternion(cameraHolder.transform.localRotation.x, lr.gameObject.transform.localRotation.y, lr.gameObject.transform.localRotation.z, lr.gameObject.transform.localRotation.w);
     }
 
     private void StartGrapple()
@@ -57,21 +62,25 @@ public class Grappling : MonoBehaviour
         grappling = true;
 
         RaycastHit hit;
-        if (Physics.Raycast(cam.position, cam.forward, out hit, maxGrappleDistance, whatIsGrappable))
+        Debug.DrawRay(gunTip.position, gunTip.forward, Color.red,1f);
+        if (Physics.Raycast(gunTip.position, gunTip.forward, out hit, maxGrappleDistance, whatIsGrappable))
         {
-            grapplePoint = hit.point;
+            Debug.Log($"We hit {hit.transform.name}");
+            savedHit = hit;
 
             Invoke(nameof(ExecuteGrapple), grappleDelayTime);
         }
         else
         {
-            grapplePoint = cam.position + cam.forward * maxGrappleDistance;
+            grapplePoint = gunTip.position + gunTip.forward * maxGrappleDistance;
 
             Invoke(nameof(StopGrapple), grappleDelayTime);
         }
 
         lr.enabled = true;
-        lr.SetPosition(1, grapplePoint);
+        // lr.SetPosition(1, grapplePoint);
+        setGrappleRope(hit);
+
     }
 
     private void ExecuteGrapple()
@@ -86,5 +95,12 @@ public class Grappling : MonoBehaviour
         grapplingCdTimer = grapplingCd;
 
         lr.enabled = false;
+    }
+
+    private void setGrappleRope(RaycastHit hit){
+        Vector3[] positions = new Vector3[2];
+        positions[0] = gunTip.position;
+        positions[1] = hit.point;
+        lr.SetPositions(positions);
     }
 }
