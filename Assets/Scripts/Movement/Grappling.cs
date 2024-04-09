@@ -6,6 +6,7 @@ public class Grappling : MonoBehaviour
 {
     [Header("References")]
     private PlayerMovement pm;
+    private DoubleJump dj;
     public Transform cam;
     public Transform shootPoint;
     public LayerMask whatIsGrappable;
@@ -17,6 +18,14 @@ public class Grappling : MonoBehaviour
     public float grappleDelayTime;
 
     private Vector3 grapplePoint;
+    private SpringJoint joint;
+
+    [SerializeField] float maxJointDistance = 0.8f;
+    [SerializeField] float minJointDistance = 0.25f;
+    [SerializeField] float jointSpringValue = 4.5f;
+    [SerializeField] float jointDamperValue = 7f;
+    [SerializeField] float jointMassScaleValue = 4.5f;
+
 
     [Header("Cooldown")]
     public float grapplingCd;
@@ -25,13 +34,14 @@ public class Grappling : MonoBehaviour
     [Header("Input")]
     public KeyCode grappleKey = KeyCode.R;
 
-    private bool grappling;
+    public bool grappling;
 
     private RaycastHit savedHit;
 
     void Start()
     {
         pm = GetComponent<PlayerMovement>();
+        dj = GetComponent<DoubleJump>();
     }
 
     void Update()
@@ -45,52 +55,66 @@ public class Grappling : MonoBehaviour
             StopGrapple();
         }
 
-        if (grapplingCdTimer > 0)
-        {
-            grapplingCdTimer -= Time.deltaTime;
-        }
-
         if(grappling){
+            //setGrappleRope(savedHit);
+        }
+    }
+
+    void LateUpdate()
+    {
+        if (grappling)
+        {
             setGrappleRope(savedHit);
         }
-        //lr.gameObject.transform.localRotation = new Quaternion(cameraHolder.transform.localRotation.x, lr.gameObject.transform.localRotation.y, lr.gameObject.transform.localRotation.z, lr.gameObject.transform.localRotation.w);
     }
 
     private void StartGrapple()
     {
-        //if (grapplingCdTimer > 0)
-        //{
-        //    return;
-        //}
-
         Debug.Log("Grapple");
 
         grappling = true;
 
         RaycastHit hit;
-        Debug.DrawRay(shootPoint.position, shootPoint.forward, Color.red,1f);
+        //Debug.DrawRay(shootPoint.position, shootPoint.forward, Color.red,1f);
         if (Physics.Raycast(shootPoint.position, shootPoint.forward, out hit, maxGrappleDistance, whatIsGrappable))
         {
             Debug.Log($"We hit {hit.transform.name}");
             savedHit = hit;
-
-            Invoke(nameof(ExecuteGrapple), grappleDelayTime);
+            ExecuteGrapplePhysics(savedHit);
         }
         else
         {
-            grapplePoint = shootPoint.position + shootPoint.forward * maxGrappleDistance;
-
-            Invoke(nameof(StopGrapple), grappleDelayTime);
+            // below doesn't work yet
+            //grapplePoint = shootPoint.position + shootPoint.forward * maxGrappleDistance;
+            return;
         }
 
         lr.enabled = true;
-        setGrappleRope(hit);
-
+        // don't think below is necessary
+        //setGrappleRope(hit);
     }
 
-    private void ExecuteGrapple()
+    private void ExecuteGrapplePhysics(RaycastHit hit)
     {
+        Vector3 grapplePoint = hit.point;
 
+        joint = pm.gameObject.AddComponent<SpringJoint>();
+        joint.autoConfigureConnectedAnchor = false;
+        joint.connectedAnchor = grapplePoint;
+
+        float distanceFromPoint = Vector3.Distance(a: pm.gameObject.transform.position, b: grapplePoint);
+
+        // The distance grapple will try to keep from grapple point. mess with this
+        joint.maxDistance = distanceFromPoint * maxJointDistance;
+        joint.minDistance = distanceFromPoint * minJointDistance;
+
+        // Change these values until good fit
+        joint.spring = jointSpringValue; // higher spring = more pull/push
+        joint.damper = jointDamperValue;
+        joint.massScale = jointMassScaleValue;
+
+        // Let player double jump again
+        dj.groundCheck.gameObject.SetActive(true);
     }
 
     private void StopGrapple()
@@ -100,6 +124,8 @@ public class Grappling : MonoBehaviour
         grapplingCdTimer = grapplingCd;
 
         lr.enabled = false;
+
+        Destroy(joint);
     }
 
     private void setGrappleRope(RaycastHit hit){

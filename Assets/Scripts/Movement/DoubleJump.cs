@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DoubleJump : MonoBehaviour
 {
-    [SerializeField] Transform groundCheck;
+    public Transform groundCheck;
     [SerializeField] LayerMask groundMask;
     [SerializeField] KeyCode jumpKey = KeyCode.Space;
 
@@ -13,6 +13,7 @@ public class DoubleJump : MonoBehaviour
 
     PlayerMovement pm;
     Rigidbody rb;
+    Grappling grapple;
 
     float groundDistance = 0.4f;
     public float jumpForce = 5f;
