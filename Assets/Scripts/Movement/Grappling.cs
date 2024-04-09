@@ -7,7 +7,7 @@ public class Grappling : MonoBehaviour
     [Header("References")]
     private PlayerMovement pm;
     public Transform cam;
-    public Transform gunTip;
+    public Transform shootPoint;
     public LayerMask whatIsGrappable;
     public LineRenderer lr;
     [SerializeField] GameObject cameraHolder;
@@ -40,6 +40,10 @@ public class Grappling : MonoBehaviour
         {
             StartGrapple();
         }
+        if (Input.GetKeyUp(grappleKey))
+        {
+            StopGrapple();
+        }
 
         if (grapplingCdTimer > 0)
         {
@@ -59,11 +63,13 @@ public class Grappling : MonoBehaviour
         //    return;
         //}
 
+        Debug.Log("Grapple");
+
         grappling = true;
 
         RaycastHit hit;
-        Debug.DrawRay(gunTip.position, gunTip.forward, Color.red,1f);
-        if (Physics.Raycast(gunTip.position, gunTip.forward, out hit, maxGrappleDistance, whatIsGrappable))
+        Debug.DrawRay(shootPoint.position, shootPoint.forward, Color.red,1f);
+        if (Physics.Raycast(shootPoint.position, shootPoint.forward, out hit, maxGrappleDistance, whatIsGrappable))
         {
             Debug.Log($"We hit {hit.transform.name}");
             savedHit = hit;
@@ -72,13 +78,12 @@ public class Grappling : MonoBehaviour
         }
         else
         {
-            grapplePoint = gunTip.position + gunTip.forward * maxGrappleDistance;
+            grapplePoint = shootPoint.position + shootPoint.forward * maxGrappleDistance;
 
             Invoke(nameof(StopGrapple), grappleDelayTime);
         }
 
         lr.enabled = true;
-        // lr.SetPosition(1, grapplePoint);
         setGrappleRope(hit);
 
     }
@@ -99,7 +104,7 @@ public class Grappling : MonoBehaviour
 
     private void setGrappleRope(RaycastHit hit){
         Vector3[] positions = new Vector3[2];
-        positions[0] = gunTip.position;
+        positions[0] = shootPoint.position;
         positions[1] = hit.point;
         lr.SetPositions(positions);
     }

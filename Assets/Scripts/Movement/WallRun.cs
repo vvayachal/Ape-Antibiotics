@@ -55,7 +55,6 @@ public class WallRun : MonoBehaviour
                 {
                     jumpRequest = true;
                 }
-                Debug.Log("wall running on the left");
             }
             else if (wallRight)
             {
@@ -65,7 +64,6 @@ public class WallRun : MonoBehaviour
                 {
                     jumpRequest = true;
                 }
-                Debug.Log("wall running on the right");
             }
             else
             {
