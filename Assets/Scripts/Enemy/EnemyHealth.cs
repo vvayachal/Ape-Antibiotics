@@ -31,7 +31,7 @@ public class EnemyHealth : MonoBehaviour
     public void TakeDamage(float damage)
     {
         hitPoints -= damage;
-        Debug.Log($"{this.name} health: {hitPoints}");
+        //Debug.Log($"{this.name} health: {hitPoints}");
 
         if (hitPoints <= 0)
         {

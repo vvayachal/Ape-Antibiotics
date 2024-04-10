@@ -55,7 +55,6 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-        Debug.Log("Testing");
     }
 
     private void Update()

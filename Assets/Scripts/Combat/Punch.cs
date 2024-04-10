@@ -5,6 +5,7 @@ using UnityEngine;
 public class Punch : MonoBehaviour
 {
     private Animator anim;
+    private Knockback knockb;
     public Transform attackPoint;
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
@@ -12,11 +13,13 @@ public class Punch : MonoBehaviour
     float lastfired;
     public float FireRate = 20f;
     public float damage = 10f;
+    
 
 
     void Start()
     {
         anim = GetComponent<Animator>();
+        knockb = GetComponent<Knockback>();
     }
 
     void Update()
@@ -49,9 +52,10 @@ public class Punch : MonoBehaviour
                 {
                     enemy.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage);
                 }
-            }
 
-            // Knock them back
+                // Knock them back
+                StartCoroutine(knockb.ApplyKnockBack(enemy, attackPoint.position, damage));
+            }
         }
     }
 

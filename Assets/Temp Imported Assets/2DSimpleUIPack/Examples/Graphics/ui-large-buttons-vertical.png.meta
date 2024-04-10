@@ -53,6 +53,7 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -84,9 +85,12 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
   applyGammaDecoding: 0
   platformSettings:
   - serializedVersion: 3
@@ -120,10 +124,10 @@ TextureImporter:
       name: ui-large-buttons-vertical_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 96
-        width: 16
-        height: 48
+        x: 1
+        y: 97
+        width: 14
+        height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,10 +145,10 @@ TextureImporter:
       name: ui-large-buttons-vertical_1
       rect:
         serializedVersion: 2
-        x: 16
-        y: 96
-        width: 16
-        height: 48
+        x: 17
+        y: 97
+        width: 14
+        height: 45
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -162,10 +166,10 @@ TextureImporter:
       name: ui-large-buttons-vertical_2
       rect:
         serializedVersion: 2
-        x: 32
-        y: 96
-        width: 16
-        height: 48
+        x: 33
+        y: 97
+        width: 14
+        height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -183,10 +187,10 @@ TextureImporter:
       name: ui-large-buttons-vertical_3
       rect:
         serializedVersion: 2
-        x: 48
-        y: 96
-        width: 16
-        height: 48
+        x: 49
+        y: 97
+        width: 14
+        height: 45
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -204,10 +208,10 @@ TextureImporter:
       name: ui-large-buttons-vertical_4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 48
-        width: 16
-        height: 48
+        x: 1
+        y: 49
+        width: 14
+        height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -225,10 +229,10 @@ TextureImporter:
       name: ui-large-buttons-vertical_5
       rect:
         serializedVersion: 2
-        x: 16
-        y: 48
-        width: 16
-        height: 48
+        x: 17
+        y: 49
+        width: 14
+        height: 45
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -246,10 +250,10 @@ TextureImporter:
       name: ui-large-buttons-vertical_6
       rect:
         serializedVersion: 2
-        x: 32
-        y: 48
-        width: 16
-        height: 48
+        x: 33
+        y: 49
+        width: 14
+        height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -267,10 +271,10 @@ TextureImporter:
       name: ui-large-buttons-vertical_7
       rect:
         serializedVersion: 2
-        x: 48
-        y: 48
-        width: 16
-        height: 48
+        x: 49
+        y: 49
+        width: 14
+        height: 45
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -288,10 +292,10 @@ TextureImporter:
       name: ui-large-buttons-vertical_8
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 16
-        height: 48
+        x: 1
+        y: 1
+        width: 14
+        height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -309,10 +313,10 @@ TextureImporter:
       name: ui-large-buttons-vertical_9
       rect:
         serializedVersion: 2
-        x: 16
-        y: 0
-        width: 16
-        height: 48
+        x: 17
+        y: 1
+        width: 14
+        height: 45
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -54,10 +54,6 @@ public class Grappling : MonoBehaviour
         {
             StopGrapple();
         }
-
-        if(grappling){
-            //setGrappleRope(savedHit);
-        }
     }
 
     void LateUpdate()
@@ -75,7 +71,6 @@ public class Grappling : MonoBehaviour
         grappling = true;
 
         RaycastHit hit;
-        //Debug.DrawRay(shootPoint.position, shootPoint.forward, Color.red,1f);
         if (Physics.Raycast(shootPoint.position, shootPoint.forward, out hit, maxGrappleDistance, whatIsGrappable))
         {
             Debug.Log($"We hit {hit.transform.name}");
@@ -84,16 +79,13 @@ public class Grappling : MonoBehaviour
         }
         else
         {
-            // below doesn't work yet
-            //grapplePoint = shootPoint.position + shootPoint.forward * maxGrappleDistance;
             return;
         }
 
         lr.enabled = true;
-        // don't think below is necessary
-        //setGrappleRope(hit);
     }
 
+    // change to fixed update
     private void ExecuteGrapplePhysics(RaycastHit hit)
     {
         Vector3 grapplePoint = hit.point;
