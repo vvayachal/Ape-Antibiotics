@@ -11,8 +11,11 @@ public class Knockback : MonoBehaviour
 
     [SerializeField] float timeToReposition = 2f;
 
-    public IEnumerator  (Collider enemy, Vector3 knockbackPoint, float knockbackDamage)
+    public IEnumerator ApplyKnockBack (Collider enemy, Vector3 knockbackPoint, float knockbackDamage)
     {
+        // Add use cases for components that don't exist. 
+        // Some knockbackable objects wont have nav, etc. 
+
         if (knockback)
         {
             Debug.Log("knockback applied");
@@ -31,7 +34,7 @@ public class Knockback : MonoBehaviour
 
             en.enabled = true;
             anim.enabled = true;
-            anim.enabled = true;
+            nav.enabled = true;
         }
     }
 }
