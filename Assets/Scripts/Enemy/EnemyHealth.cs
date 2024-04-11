@@ -10,6 +10,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] float timeBeforeDestroy = 3f;
     Animator animator;
     public Image healthBar;
+    public float timeBeforeReposition = 5f;
 
     bool isDead = false;
 

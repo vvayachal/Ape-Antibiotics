@@ -7,11 +7,13 @@ public class Grappling : MonoBehaviour
     [Header("References")]
     private PlayerMovement pm;
     private DoubleJump dj;
+    private Rigidbody rb;
     public Transform cam;
     public Transform shootPoint;
     public LayerMask whatIsGrappable;
     public LineRenderer lr;
     [SerializeField] GameObject cameraHolder;
+    [SerializeField] GameObject grappleGun;
 
     [Header("Grappling")]
     public float maxGrappleDistance;
@@ -42,6 +44,8 @@ public class Grappling : MonoBehaviour
     {
         pm = GetComponent<PlayerMovement>();
         dj = GetComponent<DoubleJump>();
+        rb = GetComponent<Rigidbody>();
+        grappleGun.SetActive(false);
     }
 
     void Update()
@@ -83,6 +87,7 @@ public class Grappling : MonoBehaviour
         }
 
         lr.enabled = true;
+        grappleGun.SetActive(true);
     }
 
     // change to fixed update
@@ -93,6 +98,7 @@ public class Grappling : MonoBehaviour
         joint = pm.gameObject.AddComponent<SpringJoint>();
         joint.autoConfigureConnectedAnchor = false;
         joint.connectedAnchor = grapplePoint;
+        joint.connectedBody = rb;
 
         float distanceFromPoint = Vector3.Distance(a: pm.gameObject.transform.position, b: grapplePoint);
 
@@ -112,12 +118,11 @@ public class Grappling : MonoBehaviour
     private void StopGrapple()
     {
         grappling = false;
-
+        grappleGun.SetActive(false);
         grapplingCdTimer = grapplingCd;
-
         lr.enabled = false;
-
         Destroy(joint);
+
     }
 
     private void setGrappleRope(RaycastHit hit){

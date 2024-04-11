@@ -9,7 +9,12 @@ public class Knockback : MonoBehaviour
     [SerializeField] float knockbackMultiplier = 1f;
     [SerializeField] float upwardsForce = 10f;
 
-    [SerializeField] float timeToReposition = 2f;
+    float timeToReposition = 2f;
+
+    private void Start()
+    {
+        timeToReposition = FindObjectOfType<EnemyHealth>().timeBeforeReposition;
+    }
 
     public IEnumerator ApplyKnockBack (Collider enemy, Vector3 knockbackPoint, float knockbackDamage)
     {
