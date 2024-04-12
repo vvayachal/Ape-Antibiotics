@@ -37,9 +37,18 @@ public class Knockback : MonoBehaviour
 
             yield return new WaitForSeconds(timeToReposition);
 
-            en.enabled = true;
-            anim.enabled = true;
-            nav.enabled = true;
+            if (en != null)
+            {
+                en.enabled = true;
+            }
+            if (anim != null)
+            {
+                anim.enabled = true;
+            }
+            if (nav != null)
+            {
+                nav.enabled = true;
+            }
         }
     }
 }
