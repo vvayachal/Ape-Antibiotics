@@ -198,6 +198,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 91594688}
   m_CullTransparentMesh: 1
+--- !u!1 &114276085
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 114276086}
+  m_Layer: 0
+  m_Name: GroundPound Hitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &114276086
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114276085}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: -0.7071068}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 8330503063304616264}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &205916233
 GameObject:
   m_ObjectHideFlags: 0
@@ -671,6 +701,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 324748296}
   m_CullTransparentMesh: 1
+--- !u!4 &447709574 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8917299432723011896, guid: 30b2fa62af37c314fb228ad042660890, type: 3}
+  m_PrefabInstance: {fileID: 602207950557005851}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &457777727
 GameObject:
   m_ObjectHideFlags: 0
@@ -1251,6 +1286,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 771413754}
   m_CullTransparentMesh: 1
+--- !u!1 &821341806 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8917299432623370591, guid: 30b2fa62af37c314fb228ad042660890, type: 3}
+  m_PrefabInstance: {fileID: 602207950557005851}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &821341819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821341806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01c992af6e05d784fbe53d510402b367, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundCheck: {fileID: 447709574}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 64
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 128
+  descendRate: 50
+  damage: 10
+  groundPoundPoint: {fileID: 114276086}
+  attackRange: 1
 --- !u!1 &930920992
 GameObject:
   m_ObjectHideFlags: 0
@@ -2411,6 +2474,10 @@ PrefabInstance:
     - target: {fileID: 8917299432623370591, guid: 30b2fa62af37c314fb228ad042660890, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917299433129249435, guid: 30b2fa62af37c314fb228ad042660890, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30b2fa62af37c314fb228ad042660890, type: 3}
