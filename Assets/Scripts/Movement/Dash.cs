@@ -14,6 +14,7 @@ public class Dash : MonoBehaviour
     public float dashForce;
     public float dashUpwardForce;
     public float dashDuration;
+    bool dashRequest;
 
     [Header("Cooldown")]
     public float dashCd;
@@ -26,19 +27,28 @@ public class Dash : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         pm = GetComponent<PlayerMovement>();
-        //orientation = this.GetComponent<>();
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(dashKey))
         {
-            Dashing();
+            dashRequest = true;
         }
 
         if (dashCdTimer >0)
         {
             dashCdTimer -= Time.deltaTime;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (dashRequest)
+        {
+            Dashing();
+
+            dashRequest = false;
         }
     }
 
