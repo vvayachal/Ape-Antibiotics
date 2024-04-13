@@ -9,7 +9,7 @@ public class Knockback : MonoBehaviour
     [SerializeField] float knockbackMultiplier = 1f;
     [SerializeField] float upwardsForce = 10f;
 
-    float timeToReposition = 2f;
+    float timeToReposition;
 
     private void Start()
     {
