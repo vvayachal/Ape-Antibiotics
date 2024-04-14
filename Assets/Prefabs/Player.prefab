@@ -632,6 +632,36 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &5414383265239747532
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1728876420473783145}
+  m_Layer: 0
+  m_Name: AOE hitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1728876420473783145
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5414383265239747532}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.967, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8917299432623370579}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5475225881492903923
 GameObject:
   m_ObjectHideFlags: 0
@@ -1099,6 +1129,8 @@ GameObject:
   - component: {fileID: 8917299432623370581}
   - component: {fileID: 8917299432623370570}
   - component: {fileID: 8917299432623370571}
+  - component: {fileID: 6519662054827226924}
+  - component: {fileID: 636570520601799653}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1122,6 +1154,7 @@ Transform:
   - {fileID: 8917299433052524401}
   - {fileID: 8917299432723011896}
   - {fileID: 8917299433259050661}
+  - {fileID: 1728876420473783145}
   - {fileID: 8917299433129249435}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1173,6 +1206,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 64
+  isGrounded: 0
 --- !u!114 &8917299432623370582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1362,7 +1396,46 @@ MonoBehaviour:
   knockback: 1
   knockbackMultiplier: 17.71
   upwardsForce: 2
-  timeToReposition: 2
+--- !u!114 &6519662054827226924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8917299432623370591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce445f7902cf5c749baab5721c7bf35f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackPoint: {fileID: 8917299433253558101}
+  attackRange: 0.5
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 128
+  FireRate: 30
+  damage: 10
+--- !u!114 &636570520601799653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8917299432623370591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01c992af6e05d784fbe53d510402b367, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 128
+  descendRate: 50
+  aoeDamage: 10
+  aoeRange: 5
+  curCooldown: 0
+  cooldown: 5
+  aoeHitbox: {fileID: 1728876420473783145}
 --- !u!1 &8917299432723011899
 GameObject:
   m_ObjectHideFlags: 0
@@ -1455,7 +1528,7 @@ Transform:
   - {fileID: 8917299434454963564}
   - {fileID: 602207949717786722}
   m_Father: {fileID: 8917299432623370579}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8917299433129249432
 MonoBehaviour:
