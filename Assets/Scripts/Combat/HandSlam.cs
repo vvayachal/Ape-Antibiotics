@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class HandSlam : MonoBehaviour
 {
-    //heavy attack, the attack is basically the same thing as the regular punch but it should have a longer cooldown and more damage.
+    /**
+     * really this script is just the punch attack but on a heavier cooldown and damage level,
+     * the main thing that will differentiate it will be animations.
+     */
     private Animator anim;
     private Knockback knockb;
     public Transform attackPoint;
