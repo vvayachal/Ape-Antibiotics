@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class GroundPound : MonoBehaviour
 {
+    //aoe damage 
     public Transform groundCheck;
     [SerializeField] LayerMask groundMask;
 
-    //private Knockback knockb;
-    //public Transform smashPoint;
-    //public float shockRange = 0.5f;
+    private Knockback knockb;
+    public Transform smashPoint;
+    public float shockRange = 0.5f;
     public LayerMask enemyLayers;
 
     float groundDistance = 0.4f;
 
     public float descendRate = 20f;
     public float damage = 10f;
-    private Knockback knockb;
     public Transform groundPoundPoint;
     public float attackRange = 2f;
+    public float cooldown;
 
     bool isGrounded;
     bool groundPoundRequest;
@@ -46,10 +47,12 @@ public class GroundPound : MonoBehaviour
     {
         if (groundPoundRequest)
         {
-            PerformGroundPound();
-
-            groundPoundRequest = false;
-            pm.isJumping = false;
+            if(!isGrounded)
+            {
+                PerformGroundPound();
+                groundPoundRequest = false;
+                pm.isJumping = false;
+            }
         }
     }
 
@@ -80,12 +83,13 @@ public class GroundPound : MonoBehaviour
         rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         rb.AddForce(transform.up * -(descendRate), ForceMode.Impulse);
         groundCheck.gameObject.SetActive(false);
-
         StartGroundPound();
     }
 
     void StartGroundPound()
-    {
+    { 
+        Debug.Log("Attacking!");
+
         // Detect enemies in range of attack
         Collider[] hitEnemies = Physics.OverlapSphere(groundPoundPoint.position, attackRange, enemyLayers);
 
@@ -99,9 +103,9 @@ public class GroundPound : MonoBehaviour
             {
                 enemy.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage);
             }
-
+        
             // Knock them back
-            StartCoroutine(knockb.ApplyKnockBack(enemy, groundPoundPoint.position, damage));
+            StartCoroutine(knockb.ApplyKnockBack(enemy, -(groundPoundPoint.forward), damage));
         }
     }
 
