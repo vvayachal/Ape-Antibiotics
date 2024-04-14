@@ -1303,7 +1303,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 821341806}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01c992af6e05d784fbe53d510402b367, type: 3}
   m_Name: 
@@ -1322,6 +1322,25 @@ MonoBehaviour:
   groundPoundPoint: {fileID: 114276086}
   attackRange: 1
   cooldown: 0
+--- !u!114 &821341820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821341806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce445f7902cf5c749baab5721c7bf35f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackPoint: {fileID: 1814781136}
+  attackRange: 0.5
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 128
+  FireRate: 30
+  damage: 60
 --- !u!1 &930920992
 GameObject:
   m_ObjectHideFlags: 0
@@ -2169,6 +2188,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1776648007}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1814781136 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8917299433253558101, guid: 30b2fa62af37c314fb228ad042660890, type: 3}
+  m_PrefabInstance: {fileID: 602207950557005851}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1890503214
 GameObject:
   m_ObjectHideFlags: 0
@@ -2474,6 +2498,10 @@ PrefabInstance:
     - target: {fileID: 8917299432623370579, guid: 30b2fa62af37c314fb228ad042660890, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917299432623370581, guid: 30b2fa62af37c314fb228ad042660890, type: 3}
+      propertyPath: damage
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8917299432623370583, guid: 30b2fa62af37c314fb228ad042660890, type: 3}
       propertyPath: shieldInCanvas

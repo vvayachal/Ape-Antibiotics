@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HandSlam : MonoBehaviour
 {
-    //heavy attack
+    //heavy attack, the attack is basically the same thing as the regular punch but it should have a longer cooldown and more damage.
     private Animator anim;
     private Knockback knockb;
     public Transform attackPoint;
@@ -38,7 +38,7 @@ public class HandSlam : MonoBehaviour
             lastfired = Time.time;
 
             // Play attack animation
-            anim.SetTrigger("SLAM!");
+            anim.SetTrigger("Punch");
 
             // Detect enemies in range of attack
             Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);

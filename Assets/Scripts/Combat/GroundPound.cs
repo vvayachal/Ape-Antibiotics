@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GroundPound : MonoBehaviour
 {
+    //to those who take a look at this, I'm trying to make it feel better :)
+    //possible I may need to redo it entirely
+
     //aoe damage 
     public Transform groundCheck;
     [SerializeField] LayerMask groundMask;
