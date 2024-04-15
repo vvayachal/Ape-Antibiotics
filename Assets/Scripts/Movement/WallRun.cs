@@ -6,7 +6,6 @@ public class WallRun : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] Transform orientation;
-    public float wallRunDrag = 2f;
 
     [Header("Detection")]
     [SerializeField] float wallDistance = 0.5f;
@@ -19,6 +18,7 @@ public class WallRun : MonoBehaviour
     bool jumpRequest;
     bool stopRunRequest;
     public bool wallRunning;
+    public float wallRunDrag;
 
     [Header("Camera")]
     [SerializeField] private Camera cam;
@@ -144,8 +144,6 @@ public class WallRun : MonoBehaviour
         rb.useGravity = false;
 
         rb.AddForce(Vector3.down * wallRunGravity, ForceMode.Force);
-
-        wallRunning = true;
     }
 
     void JumpOffWall()
@@ -167,6 +165,5 @@ public class WallRun : MonoBehaviour
     void StopWallRun()
     {
         rb.useGravity = true;
-        wallRunning = false;
     }
 }

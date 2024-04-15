@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 5b65a71e7b4b6fd43bcfd282cfebff61, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -2021,7 +2021,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2363292605793829244, guid: 3b4b938e7d2773146bd4f8081e198f44, type: 3}
       propertyPath: m_text
-      value: Jump towards a surface while holding [SPACE] to wallrun
+      value: Jump towards a surface while holding [SPACE] to wallrun. (NO DASHING!!!)
       objectReference: {fileID: 0}
     - target: {fileID: 2363292605793829244, guid: 3b4b938e7d2773146bd4f8081e198f44, type: 3}
       propertyPath: m_fontSize
@@ -6697,7 +6697,7 @@ GameObject:
   - component: {fileID: 236199165839452924}
   m_Layer: 9
   m_Name: Gorilla (1)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8189,7 +8189,7 @@ GameObject:
   - component: {fileID: 8330503063304616273}
   m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8226,12 +8226,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orientation: {fileID: 8330503062946744170}
-  wallRunDrag: 2
   wallDistance: 1.5
   minimumJumpHeight: 1.5
   wallRunGravity: 0.2
   wallRunJumpForce: 6
   wallRunning: 0
+  wallRunDrag: 2
   cam: {fileID: 8330503063691795833}
   fov: 90
   wallRunfov: 110

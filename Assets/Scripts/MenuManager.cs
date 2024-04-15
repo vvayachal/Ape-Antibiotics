@@ -9,6 +9,11 @@ public class MenuManager : MonoBehaviour
 
     public void LoadNewScene(int sceneNumber)
     {
+        if (sceneNumber == 0)
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+        }
         UnityEngine.SceneManagement.SceneManager.LoadScene(sceneNumber);
     }
 
@@ -19,8 +24,9 @@ public class MenuManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other != CompareTag("Player")) return;
+        if (!other.gameObject.CompareTag("Player")) return;
 
+        Debug.Log("Scene changing...");
         LoadNewScene(sceneNumber);
     }
 }

@@ -5745,7 +5745,7 @@ GameObject:
   - component: {fileID: 236199165839452924}
   m_Layer: 9
   m_Name: Gorilla (1)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7274,12 +7274,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orientation: {fileID: 8330503062946744170}
-  wallRunDrag: 2
   wallDistance: 1.5
   minimumJumpHeight: 1.5
   wallRunGravity: 0.2
   wallRunJumpForce: 6
   wallRunning: 0
+  wallRunDrag: 2
   cam: {fileID: 8330503063691795833}
   fov: 90
   wallRunfov: 110
