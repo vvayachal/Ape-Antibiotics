@@ -41,8 +41,14 @@ public class GroundPound : MonoBehaviour
         {
             if((pm.isJumping || !this.GetComponent<DoubleJump>().isGrounded) && cooldown <= 0) 
             {
+                //adds in additional damage based on height, very basic will be redone to track height at jump
+                float yAtGroundPound = this.transform.position.y;
+                float curAoeDamage = aoeDamage;
+                aoeDamage += yAtGroundPound;
                 PerformGroundPound();
-            }    
+                Debug.Log("did " + aoeDamage + " damage.");
+                aoeDamage = curAoeDamage;
+            }
         }
 
         if(cooldown > 0)
