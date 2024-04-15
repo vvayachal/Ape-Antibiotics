@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     float speed;
     [SerializeField] Text speedText;
     private float currentSpeed;
+    WallRun wr;
    
     [Header("Sprinting")]
     [SerializeField] float walkSpeed = 4f;
@@ -53,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        wr = GetComponent<WallRun>();
     }
 
     private void Update()
@@ -144,6 +146,10 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded)
         {
             rb.drag = groundDrag;
+        }
+        else if (wr.wallRunning)
+        {
+            rb.drag = wr.wallRunDrag;
         }
         else
         {
