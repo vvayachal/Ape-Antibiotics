@@ -671,6 +671,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 324748296}
   m_CullTransparentMesh: 1
+--- !u!4 &437190306 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1728876420473783145, guid: 30b2fa62af37c314fb228ad042660890, type: 3}
+  m_PrefabInstance: {fileID: 602207950557005851}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &457777727
 GameObject:
   m_ObjectHideFlags: 0
@@ -784,7 +789,7 @@ PrefabInstance:
     - target: {fileID: 4778843204639759269, guid: 5fc4ea5f06984c84c8bf2130883eba42, type: 3}
       propertyPath: target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1123956662}
     - target: {fileID: 4778843204639759274, guid: 5fc4ea5f06984c84c8bf2130883eba42, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1540,7 +1545,7 @@ PrefabInstance:
     - target: {fileID: 4778843204639759269, guid: 5fc4ea5f06984c84c8bf2130883eba42, type: 3}
       propertyPath: target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1123956662}
     - target: {fileID: 4778843204639759274, guid: 5fc4ea5f06984c84c8bf2130883eba42, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1698,6 +1703,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1046120385}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1123956662 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8917299432623370579, guid: 30b2fa62af37c314fb228ad042660890, type: 3}
+  m_PrefabInstance: {fileID: 602207950557005851}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1391824290
 GameObject:
   m_ObjectHideFlags: 0
@@ -2522,6 +2532,22 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 6519662054827226924, guid: 30b2fa62af37c314fb228ad042660890, type: 3}
+      propertyPath: damage
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6519662054827226924, guid: 30b2fa62af37c314fb228ad042660890, type: 3}
+      propertyPath: FireRate
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6519662054827226924, guid: 30b2fa62af37c314fb228ad042660890, type: 3}
+      propertyPath: attackPoint
+      value: 
+      objectReference: {fileID: 437190306}
+    - target: {fileID: 6519662054827226924, guid: 30b2fa62af37c314fb228ad042660890, type: 3}
+      propertyPath: attackRange
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8917299432623370577, guid: 30b2fa62af37c314fb228ad042660890, type: 3}
       propertyPath: speedText
       value: 
@@ -2606,7 +2632,7 @@ PrefabInstance:
     - target: {fileID: 4778843204639759269, guid: 5fc4ea5f06984c84c8bf2130883eba42, type: 3}
       propertyPath: target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1123956662}
     - target: {fileID: 4778843204639759274, guid: 5fc4ea5f06984c84c8bf2130883eba42, type: 3}
       propertyPath: m_RootOrder
       value: 1

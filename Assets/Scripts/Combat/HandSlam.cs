@@ -41,7 +41,7 @@ public class HandSlam : MonoBehaviour
             lastfired = Time.time;
 
             // Play attack animation
-            anim.SetTrigger("Punch");
+            anim.SetTrigger("Slam");
 
             // Detect enemies in range of attack
             Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
