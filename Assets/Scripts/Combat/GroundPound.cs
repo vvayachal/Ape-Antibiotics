@@ -39,7 +39,7 @@ public class GroundPound : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.LeftControl))
         {
-            if(pm.isJumping && cooldown <= 0) 
+            if((pm.isJumping || !this.GetComponent<DoubleJump>().isGrounded) && cooldown <= 0) 
             {
                 PerformGroundPound();
             }    
