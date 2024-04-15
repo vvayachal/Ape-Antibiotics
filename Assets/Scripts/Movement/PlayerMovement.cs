@@ -9,11 +9,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform orientation;
 
     [Header("Movement")]
-    public float speed;
-    float movementMultiplier = 10f;
-    [SerializeField] float airMultiplier = 0.4f;
+    float speed;
     [SerializeField] Text speedText;
     private float currentSpeed;
+    WallRun wr;
    
     [Header("Sprinting")]
     [SerializeField] float walkSpeed = 4f;
@@ -55,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        wr = GetComponent<WallRun>();
     }
 
     private void Update()
@@ -101,15 +101,15 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isGrounded && !OnSlope())
         {
-            rb.AddForce(moveDirection.normalized * speed * movementMultiplier, ForceMode.Acceleration);
+            rb.AddForce(moveDirection.normalized * speed, ForceMode.Acceleration);
         }
         else if (isGrounded && OnSlope())
         {
-            rb.AddForce(slopeMoveDirection.normalized * speed * movementMultiplier, ForceMode.Acceleration);
+            rb.AddForce(slopeMoveDirection.normalized * speed, ForceMode.Acceleration);
         }
         else if (!isGrounded)
         {
-            rb.AddForce(moveDirection.normalized * speed * airMultiplier, ForceMode.Acceleration);
+            rb.AddForce(moveDirection.normalized * speed, ForceMode.Acceleration);
         }
     }
 
@@ -147,6 +147,10 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.drag = groundDrag;
         }
+        else if (wr.wallRunning)
+        {
+            rb.drag = wr.wallRunDrag;
+        }
         else
         {
             rb.drag = airDrag;
@@ -178,9 +182,11 @@ public class PlayerMovement : MonoBehaviour
 
     void DetectSpeed()
     {
-        currentSpeed = ((int)rb.velocity.magnitude);
+        currentSpeed = ((float)rb.velocity.magnitude);
+        // Round to nearest tenth decimal
+        var newValue = System.Math.Round(currentSpeed,1);
 
-        speedText.text = currentSpeed.ToString();
+        speedText.text = newValue.ToString();
     }
 
     void ChangeYVelocity(float multiplier)
