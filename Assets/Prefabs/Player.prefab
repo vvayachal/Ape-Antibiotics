@@ -1807,6 +1807,7 @@ MonoBehaviour:
     m_Bits: 128
   FireRate: 8
   damage: 61.67
+  canPunch: 0
 --- !u!114 &7847395892434030776
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,7 +13,11 @@ public class Punch : MonoBehaviour
     float lastfired;
     public float FireRate = 20f;
     public float damage = 10f;
-    
+
+    public bool canPunch = true;
+
+    public Animator bashAnimator;
+
 
 
     void Start()
@@ -27,36 +31,40 @@ public class Punch : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             StartPunch();
+            bashAnimator.SetTrigger("Bash");
         }
     }
 
     public void StartPunch()
     {
-        if (Time.time - lastfired > 1 / FireRate)
-        {
-            lastfired = Time.time;
 
-            // Play attack animation
-            anim.SetTrigger("Punch");
+        if (Time.time - lastfired > 1 / FireRate && canPunch == true)
+            {
+                lastfired = Time.time;
+
+                // Play attack animation
+                anim.SetTrigger("Punch");
+
+                
 
             // Detect enemies in range of attack
             Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
 
-            // Damage them
-            foreach(Collider enemy in hitEnemies)
-            {
-                // pretty inefficient because we're using
-                // getcomponent twice but idk how to really optimize this
-                Debug.Log($"{this.name} has punched {enemy.name}");
-                if (enemy.gameObject.GetComponent<EnemyHealth>() != null)
+                // Damage them
+                foreach (Collider enemy in hitEnemies)
                 {
-                    enemy.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage);
-                }
+                    // pretty inefficient because we're using
+                    // getcomponent twice but idk how to really optimize this
+                    Debug.Log($"{this.name} has punched {enemy.name}");
+                    if (enemy.gameObject.GetComponent<EnemyHealth>() != null)
+                    {
+                        enemy.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage);
+                    }
 
-                // Knock them back
-                StartCoroutine(knockb.ApplyKnockBack(enemy, attackPoint.position, damage));
+                    // Knock them back
+                    StartCoroutine(knockb.ApplyKnockBack(enemy, attackPoint.position, damage));
+                }
             }
-        }
     }
     
 
