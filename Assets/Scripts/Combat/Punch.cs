@@ -4,21 +4,18 @@ using UnityEngine;
 
 public class Punch : MonoBehaviour
 {
+    [SerializeField] CooldownUI cooldownUI;
     private Animator anim;
     private Knockback knockb;
     public Transform attackPoint;
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
 
-    float lastfired;
+    public float lastfired;
     public float FireRate = 20f;
     public float damage = 10f;
 
-    public bool canPunch = true;
-
-    public Animator bashAnimator;
-
-
+    public int timesPunched = 0;
 
     void Start()
     {
@@ -31,24 +28,22 @@ public class Punch : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             StartPunch();
-            bashAnimator.SetTrigger("Bash");
         }
     }
 
     public void StartPunch()
     {
+        cooldownUI.ActivateCooldown();
 
-        if (Time.time - lastfired > 1 / FireRate && canPunch == true)
+        if (Time.time - lastfired > 1 / FireRate)
             {
                 lastfired = Time.time;
 
                 // Play attack animation
                 anim.SetTrigger("Punch");
 
-                
-
-            // Detect enemies in range of attack
-            Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
+                // Detect enemies in range of attack
+                Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
 
                 // Damage them
                 foreach (Collider enemy in hitEnemies)
