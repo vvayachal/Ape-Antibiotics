@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class EnemyStateBase : State<EnemyState, StateEvent>
 {
-    protected readonly Enemy enemy;
+    protected readonly EnemyBehaviour enemyBehaviour;
     protected readonly NavMeshAgent agent;
     protected readonly Animator animator;
     protected bool requestedExit;
@@ -17,22 +17,22 @@ public abstract class EnemyStateBase : State<EnemyState, StateEvent>
     protected readonly Func<State<EnemyState, StateEvent>, bool> canExit;
 
     public EnemyStateBase(bool needsExitTime,
-        Enemy enemy,
+        EnemyBehaviour enemyBehaviour,
         float ExitTime = 0.1f,
         Action<State<EnemyState, StateEvent>> onEnter = null,
         Action<State<EnemyState, StateEvent>> onLogic = null,
         Action<State<EnemyState, StateEvent>> onExit = null,
         Func<State<EnemyState, StateEvent>, bool> canExit = null)
     {
-        this.enemy = enemy;
+        this.enemyBehaviour = enemyBehaviour;
         this.onEnter = onEnter;
         this.onLogic = onLogic;
         this.onExit = onExit;
         this.canExit = canExit;
         this.exitTime = ExitTime;
         this.needsExitTime = needsExitTime;
-        agent = enemy.GetComponent<NavMeshAgent>();
-        animator = enemy.GetComponent<Animator>();
+        agent = enemyBehaviour.GetComponent<NavMeshAgent>();
+        animator = enemyBehaviour.GetComponent<Animator>();
     }
 
     public override void OnEnter()

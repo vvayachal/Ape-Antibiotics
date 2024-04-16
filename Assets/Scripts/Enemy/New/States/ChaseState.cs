@@ -5,7 +5,7 @@ using UnityEngine;
 public class ChaseState : EnemyStateBase
 {
     private Transform target;
-    public ChaseState(bool needsExitTime, Enemy enemy, Transform target) : base(needsExitTime, enemy) 
+    public ChaseState(bool needsExitTime, EnemyBehaviour enemyBehaviour, Transform target) : base(needsExitTime, enemyBehaviour) 
     {
         this.target = target;
     }

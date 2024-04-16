@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityHFSM;
+using UnityEngine.UI;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(Animator), typeof(NavMeshAgent))]
-public class Enemy : MonoBehaviour
+public class EnemyBehaviour : MonoBehaviour
 {
     [Header("References")]
     [SerializeField]
@@ -42,7 +43,7 @@ public class Enemy : MonoBehaviour
         //Add States
         EnemyFSM.AddState(EnemyState.Idle, new IdleState(false, this));
         EnemyFSM.AddState(EnemyState.Chase, new ChaseState(true, this, player.transform));
-        EnemyFSM.AddState(EnemyState.Attack, new AttackState(true, this, OnAttack));
+        EnemyFSM.AddState(EnemyState.Attack, new AttackState(true, this, player.transform, OnAttack));
 
         //Add Transitions
         EnemyFSM.AddTriggerTransition(StateEvent.DetectPlayer, new Transition<EnemyState>(EnemyState.Idle, EnemyState.Chase));
