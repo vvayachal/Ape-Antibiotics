@@ -16,6 +16,12 @@ public class EnemyMovement : MonoBehaviour
     bool isProvoked = false;
     [SerializeField] float turnSpeed = 1f;
 
+    [Header("Sensors")]
+    [SerializeField]
+    private PlayerSensor FollowPlayerSensor;
+    [SerializeField]
+    private PlayerSensor AttackPlayerSensor;
+
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
