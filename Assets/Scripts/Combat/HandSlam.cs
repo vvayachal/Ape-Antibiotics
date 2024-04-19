@@ -52,9 +52,9 @@ public class HandSlam : MonoBehaviour
                 // pretty inefficient because we're using
                 // getcomponent twice but idk how to really optimize this
                 Debug.Log($"{this.name} has slammed {enemy.name}");
-                if (enemy.gameObject.GetComponent<EnemyHealth>() != null)
+                if (enemy.gameObject.GetComponent<EnemyManager>() != null)
                 {
-                    enemy.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage);
+                    enemy.gameObject.GetComponent<EnemyManager>().TakeDamage(damage);
                 }
 
                 // Knock them back

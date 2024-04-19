@@ -51,7 +51,7 @@ public class GroundPound : MonoBehaviour
         } else
         {
             cooldown = 0;
-            Debug.Log("Ground pound is ready to be used!");
+            //Debug.Log("Ground pound is ready to be used!");
         }
 }
 
@@ -101,9 +101,9 @@ public class GroundPound : MonoBehaviour
             // pretty inefficient because we're using
             // getcomponent twice but idk how to really optimize this
             Debug.Log($"{this.name} has knocked {enemy.name} away!");
-            if (enemy.gameObject.GetComponent<EnemyHealth>() != null)
+            if (enemy.gameObject.GetComponent<EnemyManager>() != null)
             {
-                enemy.gameObject.GetComponent<EnemyHealth>().TakeDamage(aoeDamage);
+                enemy.gameObject.GetComponent<EnemyManager>().TakeDamage(aoeDamage);
             }
 
             // Knock them back

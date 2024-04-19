@@ -11,7 +11,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField]
     float timeBeforeDestroy = 3f;
     [SerializeField]
-    float timeBeforeReposition = 5f;
+    public float timeBeforeReposition = 5f;
 
     Animator anim;
 
