@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField]
-    float hitPoints = 100f;
+    float hitPoints;
+    public EnemyObject enemyObj;
     [SerializeField]
     float timeBeforeDestroy = 3f;
     [SerializeField]
@@ -27,6 +28,8 @@ public class EnemyManager : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+
+        hitPoints = enemyObj.enemyHp;
     }
 
     void Update()

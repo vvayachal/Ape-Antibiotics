@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class ChaseState : EnemyStateBase
@@ -15,6 +16,7 @@ public class ChaseState : EnemyStateBase
         base.OnEnter();
         agent.enabled = true;
         agent.isStopped = false;
+        enemyBehaviour.isKnockedBack = false;
         Debug.Log("Chasing!");
         //animator.Play("Walk");
     }
@@ -22,7 +24,7 @@ public class ChaseState : EnemyStateBase
     public override void OnLogic()
     {
         base.OnLogic();
-        if(!requestedExit)
+        if(!requestedExit && !enemyBehaviour.isKnockedBack)
         {
             agent.SetDestination(target.position);
         } else if(agent.remainingDistance <= agent.stoppingDistance)

@@ -105,6 +105,8 @@ public class Dash : MonoBehaviour
         // Detect enemies in range of attack
         Collider[] hitEnemies = Physics.OverlapSphere(bashHitbox.position, bashRange, enemyLayers);
 
+        Debug.Log(hitEnemies.Length);
+
         foreach (Collider enemy in hitEnemies)
         {
             // pretty inefficient because we're using

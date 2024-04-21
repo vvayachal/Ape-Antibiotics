@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityHFSM;
-using UnityEngine.UI;
+using Sensors;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(Animator), typeof(NavMeshAgent))]
@@ -8,7 +8,7 @@ public class EnemyBehaviour : MonoBehaviour
 {
     [Header("References")]
     [SerializeField]
-    private Transform player;
+    public Transform player;
 
     [Header("Sensors")]
     [SerializeField]
@@ -29,6 +29,8 @@ public class EnemyBehaviour : MonoBehaviour
     private bool isInChaseRange;
     [SerializeField]
     private float lastAttackTime;
+    [SerializeField]
+    public bool isKnockedBack;
 
     private StateMachine<EnemyState, StateEvent> EnemyFSM;
     private Animator animator;
@@ -44,6 +46,7 @@ public class EnemyBehaviour : MonoBehaviour
         EnemyFSM.AddState(EnemyState.Idle, new IdleState(false, this));
         EnemyFSM.AddState(EnemyState.Chase, new ChaseState(true, this, player.transform));
         EnemyFSM.AddState(EnemyState.Attack, new AttackState(true, this, player.transform, OnAttack));
+        EnemyFSM.AddState(EnemyState.Death, new DeathState(false, this));
 
         //Add Transitions
         EnemyFSM.AddTriggerTransition(StateEvent.DetectPlayer, new Transition<EnemyState>(EnemyState.Idle, EnemyState.Chase));

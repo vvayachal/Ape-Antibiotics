@@ -11,4 +11,9 @@ public class IdleState : EnemyStateBase
         Debug.Log("Idling!");
         //animator.Play("Idle");
     }
+
+    public override void OnLogic()
+    {
+        base.OnLogic();
+    }
 }

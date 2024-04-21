@@ -2,40 +2,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SphereCollider))]
-public class PlayerSensor : MonoBehaviour
+namespace Sensors
 {
-    public Color gizmoColor;
 
-    public float radius;
-
-    public delegate void PlayerEnterEvent(Transform player);
-
-    public delegate void PlayerExitEvent(Vector3 lastKnownPosition);
-
-    public event PlayerEnterEvent OnPlayerEnter;
-
-    public event PlayerExitEvent OnPlayerExit;
-
-    private void OnTriggerEnter(Collider other)
+    [RequireComponent(typeof(SphereCollider))]
+    public class PlayerSensor : MonoBehaviour
     {
-        if(other.TryGetComponent(out PlayerMovement player))
+        public Color gizmoColor;
+
+        public float radius;
+
+        public delegate void PlayerEnterEvent(Transform player);
+
+        public delegate void PlayerExitEvent(Vector3 lastKnownPosition);
+
+        public event PlayerEnterEvent OnPlayerEnter;
+
+        public event PlayerExitEvent OnPlayerExit;
+
+        private void OnTriggerEnter(Collider other)
         {
-            OnPlayerEnter?.Invoke(player.transform);
+            if (other.tag == "Player")
+            {
+                OnPlayerEnter?.Invoke(other.transform);
+            }
         }
-    }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if(other.TryGetComponent(out PlayerMovement player))
+        private void OnTriggerExit(Collider other)
         {
-            OnPlayerExit?.Invoke(other.transform.position);
+            if (other.tag == "Player")
+            {
+                OnPlayerExit?.Invoke(other.transform.position);
+            }
         }
-    }
 
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = gizmoColor;
-        Gizmos.DrawSphere(transform.position, radius);
+        void OnDrawGizmosSelected()
+        {
+            Gizmos.color = gizmoColor;
+            Gizmos.DrawSphere(transform.position, radius);
+        }
     }
 }

@@ -23,6 +23,7 @@ public class Knockback : MonoBehaviour
 
         if (knockback)
         {
+            enemy.GetComponent<EnemyBehaviour>().isKnockedBack = true;
             //Debug.Log("knockback applied");
 
             var nav = enemy.GetComponent<NavMeshAgent>();
@@ -50,6 +51,8 @@ public class Knockback : MonoBehaviour
             {
                 nav.enabled = true;
             }
+
+            enemy.GetComponent<EnemyBehaviour>().isKnockedBack = false;
         }
     }
 }
