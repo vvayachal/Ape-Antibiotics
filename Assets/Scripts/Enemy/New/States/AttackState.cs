@@ -13,11 +13,13 @@ public class AttackState : EnemyStateBase
 
     public override void OnEnter()
     {
-
-        agent.isStopped = true;
-        base.OnEnter();
-        //animator.Play("Enemy Attack");
-        enemyBehaviour.player.GetComponentInParent<Shield>().TakeDamage(10f);
-        Debug.Log($"{this.name} has attacked {enemyBehaviour.player}");
+        if(!enemyBehaviour.transform.GetComponent<EnemyManager>().IsDead())
+        {
+            agent.isStopped = true;
+            base.OnEnter();
+            //animator.Play("Enemy Attack");
+            enemyBehaviour.player.GetComponentInParent<Shield>().TakeDamage(10f);
+            Debug.Log($"{this.name} has attacked {enemyBehaviour.player}");
+        }
     }
 }

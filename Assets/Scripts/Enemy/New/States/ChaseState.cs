@@ -13,12 +13,15 @@ public class ChaseState : EnemyStateBase
 
     public override void OnEnter()
     {
-        base.OnEnter();
-        agent.enabled = true;
-        agent.isStopped = false;
-        enemyBehaviour.isKnockedBack = false;
-        Debug.Log("Chasing!");
-        //animator.Play("Walk");
+        if (!enemyBehaviour.transform.GetComponent<EnemyManager>().IsDead() || enemyBehaviour.isKnockedBack)
+        {
+            base.OnEnter();
+            agent.enabled = true;
+            agent.isStopped = false;
+            enemyBehaviour.isKnockedBack = false;
+            Debug.Log("Chasing!");
+            //animator.Play("Walk");
+        }
     }
 
     public override void OnLogic()

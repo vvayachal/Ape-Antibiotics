@@ -6,10 +6,13 @@ public class IdleState : EnemyStateBase
 
     public override void OnEnter()
     {
-        base.OnEnter();
-        agent.isStopped = true;
-        Debug.Log("Idling!");
-        //animator.Play("Idle");
+        if (!enemyBehaviour.transform.GetComponent<EnemyManager>().IsDead() || enemyBehaviour.isKnockedBack)
+        {
+            base.OnEnter();
+            agent.isStopped = true;
+            Debug.Log("Idling!");
+            //animator.Play("Idle");
+        }
     }
 
     public override void OnLogic()
