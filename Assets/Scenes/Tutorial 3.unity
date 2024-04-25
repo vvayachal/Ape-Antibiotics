@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: c23121bb5fe3f9e44840485d9530f40d, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 9d6b1482681bebc4880a41e08eb9d4de, type: 2}
 --- !u!1001 &5319433
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1037,11 +1037,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 502622892}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Respawn Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &502622892
@@ -1304,7 +1304,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 687268091}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 154.45372, y: 133.26857, z: 215.80812}
+  m_LocalPosition: {x: 154.45372, y: 147.6, z: 215.80812}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 920642994}
@@ -1697,7 +1697,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &866840346
 BoxCollider:
@@ -2316,11 +2316,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1267948339}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Respawn Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1267948339
@@ -2867,8 +2867,8 @@ GameObject:
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1413433332
 Transform:
@@ -2983,7 +2983,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1441983885}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ac7f58ffbe35fb547935ba2a21012989, type: 3}
@@ -3583,11 +3583,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1951547736}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Respawn Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1951547736
@@ -3718,8 +3718,8 @@ GameObject:
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!114 &2005163735
 MonoBehaviour:
@@ -4221,7 +4221,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   m_UseGeometry: 0
-  m_DefaultArea: 0
+  m_DefaultArea: 1
   m_IgnoreNavMeshAgent: 1
   m_IgnoreNavMeshObstacle: 1
   m_OverrideTileSize: 0
@@ -4240,11 +4240,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2124976699}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Respawn Plane (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &2124976699
@@ -6214,7 +6214,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 503
+    m_Bits: 1527
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
