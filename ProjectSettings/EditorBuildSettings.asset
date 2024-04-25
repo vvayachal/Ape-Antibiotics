@@ -5,10 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Character Ablity Testing.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/Demo.unity
-    guid: 1c7d3dabf61f04b438f011e93bb59d0c
+    path: Assets/Scenes/Main Menu.unity
+    guid: 3fa22307cabb35d44b9cfedcb483bb02
+  - enabled: 1
+    path: Assets/Scenes/Tutorial 1.unity
+    guid: e30ecb29d79a6c24b9356d5682d88155
+  - enabled: 1
+    path: Assets/Scenes/Tutorial 2.unity
+    guid: 5943499597c5bb346a6d7e0db29620ca
+  - enabled: 1
+    path: Assets/Scenes/Tutorial 3.unity
+    guid: d726615480f8bd64f99f300f86cac59a
   m_configObjects: {}

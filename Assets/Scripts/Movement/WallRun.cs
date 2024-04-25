@@ -17,6 +17,8 @@ public class WallRun : MonoBehaviour
     bool wallRunRequest;
     bool jumpRequest;
     bool stopRunRequest;
+    public bool wallRunning;
+    public float wallRunDrag;
 
     [Header("Camera")]
     [SerializeField] private Camera cam;
