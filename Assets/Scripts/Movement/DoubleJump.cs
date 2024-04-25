@@ -9,7 +9,7 @@ public class DoubleJump : MonoBehaviour
     [SerializeField] KeyCode jumpKey = KeyCode.Space;
 
     bool jumpRequest;
-    bool isGrounded;
+    public bool isGrounded;
 
     PlayerMovement pm;
     Rigidbody rb;
