@@ -49,6 +49,9 @@ GameObject:
   - component: {fileID: 824891627540178101}
   - component: {fileID: 824891627540178091}
   - component: {fileID: 824891627540178090}
+  - component: {fileID: 1794782396}
+  - component: {fileID: 1794782397}
+  - component: {fileID: 1794782398}
   m_Layer: 8
   m_Name: Player 1
   m_TagString: Player
@@ -271,6 +274,76 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1794782396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824891627540178111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce445f7902cf5c749baab5721c7bf35f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackPoint: {fileID: 824891627883053749}
+  attackRange: 0.5
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 128
+  FireRate: 30
+  damage: 10
+--- !u!114 &1794782397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824891627540178111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01c992af6e05d784fbe53d510402b367, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  descendRate: 50
+  aoeDamage: 0
+  aoeRange: 0
+  curCooldown: 0
+  cooldown: 0
+  aoeHitbox: {fileID: 0}
+--- !u!114 &1794782398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824891627540178111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43668fa9c401f0b49b67d4e4960af317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 824891628829130892}
+  shootPoint: {fileID: 8712634551884370838}
+  whatIsGrappable:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  lr: {fileID: 8712634552108290251}
+  cameraHolder: {fileID: 8712634551621338499}
+  grappleGun: {fileID: 7422929406922669994}
+  maxGrappleDistance: 200
+  grappleDelayTime: 0
+  maxJointDistance: 0.8
+  minJointDistance: 0.25
+  jointSpringValue: 4.5
+  jointDamperValue: 7
+  jointMassScaleValue: 4.5
+  grapplingCd: 0
+  grappleKey: 114
+  grappling: 0
 --- !u!1 &824891627582463975
 GameObject:
   m_ObjectHideFlags: 0
