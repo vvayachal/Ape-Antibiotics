@@ -12,7 +12,17 @@ public class Punch : MonoBehaviour
 
     float lastfired;
     public float FireRate = 20f;
-    public float damage = 10f;
+    
+    /*
+     * This is now a mulitplier isntead of the base damage
+     * Tweak accordingly [Tegomlee]
+     */
+    public float damageMultiplier = 5f;
+    // Min and Max damage values the player can make [Tegomlee]
+    public float minDamageValue = 5f, maxDamageValue = 50f;
+
+    // Rigidbody reference used for speed calculations [Tegomlee]
+    private Rigidbody rb;
     
 
 
@@ -20,6 +30,7 @@ public class Punch : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         knockb = GetComponent<Knockback>();
+        rb = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -36,6 +47,15 @@ public class Punch : MonoBehaviour
         {
             lastfired = Time.time;
 
+            // Calculate the final damage for the current attack [Tegomlee]
+            float calculatedDamageValue = rb.velocity.magnitude * damageMultiplier;
+            float finalDamageValue;
+            if (calculatedDamageValue < minDamageValue) finalDamageValue = minDamageValue;
+            else if (calculatedDamageValue > maxDamageValue) finalDamageValue = maxDamageValue;
+            else finalDamageValue = calculatedDamageValue;
+            Debug.Log($"Final Damage: {finalDamageValue}");
+            Debug.Log($"Initial Damage: {calculatedDamageValue}");
+
             // Play attack animation
             anim.SetTrigger("Punch");
 
@@ -47,14 +67,14 @@ public class Punch : MonoBehaviour
             {
                 // pretty inefficient because we're using
                 // getcomponent twice but idk how to really optimize this
-                Debug.Log($"{this.name} has punched {enemy.name}");
                 if (enemy.gameObject.GetComponent<EnemyHealth>() != null)
                 {
-                    enemy.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage);
+                    enemy.gameObject.GetComponent<EnemyHealth>().TakeDamage(finalDamageValue);
+                    Debug.Log($"{this.name} has punched {enemy.name} for {finalDamageValue} damage.");
                 }
 
                 // Knock them back
-                StartCoroutine(knockb.ApplyKnockBack(enemy, attackPoint.position, damage));
+                StartCoroutine(knockb.ApplyKnockBack(enemy, attackPoint.position, finalDamageValue));
             }
         }
     }
