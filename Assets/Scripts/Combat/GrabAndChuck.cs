@@ -7,11 +7,12 @@ public class GrabAndChuck : MonoBehaviour
 {
     // State management variables for the class
     private bool _isCarryingObject = false;
-    private Collider _currentHeldObject;
+    private GameObject _currentHeldObject = null;
+    private GameObject _currentHeldCloneObject = null;
 
     //----------------------------
 
-    [Header("Object To Hold Attributes")]
+    [Header("Neccesary Prefabs")]
 
     [Tooltip("This will be a prefab with only mesh that will spawn in place of the original for the player to hold.")]
     [SerializeField] private GameObject _objectToReplacePrefab;
@@ -38,6 +39,11 @@ public class GrabAndChuck : MonoBehaviour
 
     //----------------------------
 
+    [Header("Chucking Attributes")]
+    [SerializeField] private float _chuckForce;
+
+    //----------------------------
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(1) && !_isCarryingObject)
@@ -49,17 +55,24 @@ public class GrabAndChuck : MonoBehaviour
                 HoldObject();
             }
         }
+
+        if (Input.GetMouseButtonUp(1) && _isCarryingObject)
+        {
+            ChuckObject();
+        }
     }
 
     /// <summary>
     /// Method <c>ObjectToGrab</c> cycles through all colliders and determines which is closest to the player.
     /// </summary>
-    /// <returns>Collider that is closest to player.</returns>
-    private Collider ObjectToGrab()
+    /// <returns><c>GameObject</c> that is closest to player.</returns>
+    private GameObject ObjectToGrab()
     {
+        // This can be modified to grab the object closest to the grab point if the design deems it so. [Tegomlee]
+
         Debug.Log("Activated");
         Collider[] allCurrentObjects = Physics.OverlapSphere(_grabPoint.position, _grabRadius, _grabLayer);
-        Collider closestObject = null;
+        GameObject closestObject = null;
         //Declared with 100f to ensure proper logic
         float closestObjectDistance = 100f;
 
@@ -67,7 +80,7 @@ public class GrabAndChuck : MonoBehaviour
         {
             if (Vector3.Distance(collider.transform.position, transform.position) < closestObjectDistance)
             {
-                closestObject = collider;
+                closestObject = collider.gameObject;
                 closestObjectDistance = Vector3.Distance(collider.transform.position, transform.position);
             }
         }
@@ -75,21 +88,49 @@ public class GrabAndChuck : MonoBehaviour
         return closestObject;
     }
 
+    /// <summary>
+    /// Method <c>HoldObject</c> creates a clone of the object that is parented to the hold point to simulate the player carrying it.
+    /// </summary>
     private void HoldObject()
     {
-        //TODO: Instead of using that object itself to hold, instantiate the model of the object and disable the original.
+        //TODO: Instead of using that object itself to hold, instantiate the model of the object and disable the original. [Complete]
 
         // Get the necessary data from the object to create its clone
         Mesh currentObjectMesh = _currentHeldObject.GetComponentInChildren<MeshFilter>().mesh;
         Material currentObjectMaterial = _currentHeldObject.GetComponentInChildren<MeshRenderer>().material;
 
         // Clone the original object
-        GameObject objectToHoldClone = Instantiate(_objectToReplacePrefab, _holdPoint.position, Quaternion.identity, _holdPoint);
-        objectToHoldClone.GetComponent<MeshFilter>().mesh = currentObjectMesh;
-        objectToHoldClone.GetComponent<MeshRenderer>().material = currentObjectMaterial;
+        _currentHeldCloneObject = Instantiate(_objectToReplacePrefab, _holdPoint.position, Quaternion.identity, _holdPoint);
+        _currentHeldCloneObject.GetComponent<MeshFilter>().mesh = currentObjectMesh;
+        _currentHeldCloneObject.GetComponent<MeshRenderer>().material = currentObjectMaterial;
 
         // Disable the original
         _currentHeldObject.gameObject.SetActive(false);
+    }
+
+    private void ChuckObject()
+    {
+        //TODO: Restore the original object and destroy the clone. Use the player's knockback script to chuck the object. [Complete]
+
+        // Get the camera's rotation
+        Quaternion currentRotation = GetComponentInChildren<Camera>().transform.rotation;
+
+        // Delete the clone
+        Destroy(_currentHeldCloneObject);
+
+        // Restore the original object and set its transform
+        _currentHeldObject.transform.position = _holdPoint.position;
+        _currentHeldObject.transform.rotation = currentRotation;
+        _currentHeldObject.SetActive(true);
+
+        // Apply the "Knockback"
+        Knockback knockback = GetComponent<Knockback>();
+        StartCoroutine(knockback.ApplyKnockBack(_currentHeldObject.GetComponent<CapsuleCollider>(), _holdPoint.position, _chuckForce));
+
+        // Reset the class state
+        _currentHeldObject = null;
+        _currentHeldCloneObject = null;
+        _isCarryingObject = false;
     }
 
     private void OnDrawGizmos()
