@@ -344,6 +344,7 @@ Transform:
   - {fileID: 1890503215}
   - {fileID: 2034034026}
   - {fileID: 529588866}
+  - {fileID: 511451007}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -947,6 +948,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 505844730}
   m_CullTransparentMesh: 1
+--- !u!4 &511451007 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2882243108182288616, guid: 92172b86c8af24cc9883caf5c92a52c6, type: 3}
+  m_PrefabInstance: {fileID: 2882243108357666711}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &529588865
 GameObject:
   m_ObjectHideFlags: 0
@@ -2827,6 +2833,71 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30b2fa62af37c314fb228ad042660890, type: 3}
+--- !u!1001 &2882243108357666711
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 206403171}
+    m_Modifications:
+    - target: {fileID: 2882243108182288407, guid: 92172b86c8af24cc9883caf5c92a52c6, type: 3}
+      propertyPath: damage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882243108182288407, guid: 92172b86c8af24cc9883caf5c92a52c6, type: 3}
+      propertyPath: damageOverTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882243108182288616, guid: 92172b86c8af24cc9883caf5c92a52c6, type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882243108182288616, guid: 92172b86c8af24cc9883caf5c92a52c6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -13.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882243108182288616, guid: 92172b86c8af24cc9883caf5c92a52c6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882243108182288616, guid: 92172b86c8af24cc9883caf5c92a52c6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882243108182288616, guid: 92172b86c8af24cc9883caf5c92a52c6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882243108182288616, guid: 92172b86c8af24cc9883caf5c92a52c6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882243108182288616, guid: 92172b86c8af24cc9883caf5c92a52c6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882243108182288616, guid: 92172b86c8af24cc9883caf5c92a52c6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882243108182288616, guid: 92172b86c8af24cc9883caf5c92a52c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882243108182288616, guid: 92172b86c8af24cc9883caf5c92a52c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882243108182288616, guid: 92172b86c8af24cc9883caf5c92a52c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882243108182288617, guid: 92172b86c8af24cc9883caf5c92a52c6, type: 3}
+      propertyPath: m_Name
+      value: Stomach Acid
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 92172b86c8af24cc9883caf5c92a52c6, type: 3}
 --- !u!1001 &4778843204762041633
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2912,7 +2983,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8434591803098887639, guid: 5fc4ea5f06984c84c8bf2130883eba42, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8434591803098887647, guid: 5fc4ea5f06984c84c8bf2130883eba42, type: 3}
       propertyPath: m_RootOrder
