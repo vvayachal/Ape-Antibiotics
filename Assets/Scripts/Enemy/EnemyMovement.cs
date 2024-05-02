@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour
 {
-    [SerializeField] Transform target;
+    Transform target; // Changed target to search for the player in awake [Tegomlee]
     NavMeshAgent navMeshAgent;
     Animator animator;
 
@@ -15,6 +15,12 @@ public class EnemyMovement : MonoBehaviour
     float distanceToTarget = Mathf.Infinity;
     bool isProvoked = false;
     [SerializeField] float turnSpeed = 1f;
+
+    private void Awake()
+    {
+        // Search for the player
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+    }
 
     void Start()
     {
