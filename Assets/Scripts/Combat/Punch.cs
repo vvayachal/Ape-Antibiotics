@@ -40,21 +40,28 @@ public class Punch : MonoBehaviour
             anim.SetTrigger("Punch");
 
             // Detect enemies in range of attack
-            Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
+            Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position,
+                                                          attackRange,
+                                                          enemyLayers);
 
             // Damage them
             foreach(Collider enemy in hitEnemies)
             {
                 // pretty inefficient because we're using
                 // getcomponent twice but idk how to really optimize this
+
+                // Refactored to use TryGetComponent instead, Could further refactor with an interface or abstract class [Tegomlee]
                 Debug.Log($"{this.name} has punched {enemy.name}");
-                if (enemy.gameObject.GetComponent<EnemyHealth>() != null)
+                if (enemy.gameObject.TryGetComponent<EnemyHealth>(out var enemyHealth))
                 {
-                    enemy.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage);
+                    enemyHealth.TakeDamage(damage);
                 }
 
-                // Knock them back
-                StartCoroutine(knockb.ApplyKnockBack(enemy, attackPoint.position, damage));
+                // Knock them back - Now uses the IKnockable interface
+                if (enemy.gameObject.TryGetComponent<IKnockable>(out var knockable))
+                {
+                    knockable.KnockBack(attackPoint.position);
+                }
             }
         }
     }

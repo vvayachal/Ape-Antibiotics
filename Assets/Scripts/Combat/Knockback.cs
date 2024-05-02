@@ -31,7 +31,7 @@ public class Knockback : MonoBehaviour
             var nav = enemy.GetComponent<NavMeshAgent>();
             var anim = enemy.GetComponent<Animator>();
             var rb = enemy.GetComponent<Rigidbody>();
-            var en = enemy.GetComponent<EnemyMovement>();
+            var en = enemy.GetComponent<EnemyMotor>();
 
             anim.enabled = false;
             nav.enabled = false;
