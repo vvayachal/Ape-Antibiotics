@@ -23,13 +23,12 @@ public class EnemyMotor : MonoBehaviour, IKnockable
     [Header("KnockBack Attributes")]
 
     [Tooltip("Controls wether the enemy is able to be knocked back. (Mainly for debugging purposes).")]
-    [SerializeField] private bool _isKnockbackable;
+    [SerializeField] bool _isKnockbackable;
 
-    [Tooltip("Controls how much knockback force is applied.")]
-    [SerializeField] private float _knockbackForce;
+    [Tooltip("Controls how much knockback force is applied to this specific enemy (Lower is lighter)."), Range(0.2f, 6f)]
+    [SerializeField] float _knockbackForceMultplier = 1f;
 
-    [Tooltip("Controls how much upward force is applied.")]
-    [SerializeField] private float _knockbackUpwardsForce;
+    //----------
 
     // Manages state of knockback
     private bool _isKnocked = false;
@@ -92,11 +91,17 @@ public class EnemyMotor : MonoBehaviour, IKnockable
         Debug.Log($"{this.name} has attacked {target.name}");
     }
 
-    public void KnockBack(Vector3 knockbackOrigin)
+    public void KnockBack(Vector3 knockbackOrigin, float baseKnockbackForce)
     {
         if (_isKnockbackable && !_isKnocked)
         {
             Debug.Log("Knockback Applied");
+
+            // Calculate the direction of the knockback
+            Vector3 knockbackDirection = transform.position - knockbackOrigin;
+
+            // Normalize the direction to eliminate the magnitude
+            knockbackDirection.Normalize();
 
             // Set the state
             _isKnocked = true;
@@ -106,7 +111,8 @@ public class EnemyMotor : MonoBehaviour, IKnockable
             navMeshAgent.enabled = false;
 
             // Add "Knockback"
-            rb.AddForce(Vector3.up * _knockbackForce, ForceMode.Impulse);
+            // I use ForceMode.VelocityChange becuase the designer will modify each enemies knockback force multiplier directly in this script's inspector.
+            rb.AddForce(knockbackDirection * baseKnockbackForce * _knockbackForceMultplier, ForceMode.VelocityChange);
         }
     }
 

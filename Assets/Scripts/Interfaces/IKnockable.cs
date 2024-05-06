@@ -8,7 +8,9 @@ public interface IKnockable
     /// <summary>
     /// Method <c>Knockback</c> will be in charge of all the logic necessary for each object to be knocked back.
     /// </summary>
-    void KnockBack(Vector3 knockbackOrigin);
+    /// <param name="baseKnockbackForce">The force of the attack.</param>
+    /// <param name="knockbackOrigin">The position of the attack.</param>
+    void KnockBack(Vector3 knockbackOrigin, float baseKnockbackForce);
 
     /// <summary>
     /// Method <c>Recover</c> will be in charge of resetting the object to its original state to be knockable again.

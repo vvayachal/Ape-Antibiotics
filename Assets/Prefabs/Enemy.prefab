@@ -414,8 +414,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chaseRange: 83.18
   _isKnockbackable: 1
-  _knockbackForce: 200
-  _knockbackUpwardsForce: 10
+  _knockbackForceMultplier: 1
 --- !u!114 &8434591803098887635
 MonoBehaviour:
   m_ObjectHideFlags: 0

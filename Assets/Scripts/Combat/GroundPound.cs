@@ -79,7 +79,7 @@ public class GroundPound : MonoBehaviour
     /*void detectDirectHit()
     {
         // Detect enemies in range of attack
-        Collider[] hitEnemies = Physics.OverlapSphere(directHitbox.position, directRange, enemyLayers);
+        Collider[] hitEnemies = Physics.OverlapSphere(directHitbox.position, directRange, affectedLayers);
 
         foreach (Collider enemy in hitEnemies)
         {
