@@ -61,7 +61,7 @@ public class Punch : MonoBehaviour
                                                         affectedLayers);
 
         // Damage them
-        foreach(Collider enemy in hitEnemies)
+        foreach (Collider enemy in hitEnemies)
         {
             // pretty inefficient because we're using
             // getcomponent twice but idk how to really optimize this
@@ -97,7 +97,7 @@ public class Punch : MonoBehaviour
     }
 
 
-    
+
 
 
     private void OnDrawGizmosSelected()
