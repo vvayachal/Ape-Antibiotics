@@ -2576,7 +2576,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5121421b2c28f9d4fa6ddda1796d23a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneNumber: 0
 --- !u!33 &1303464122
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -5999,9 +5998,9 @@ MonoBehaviour:
   attackCooldown: 0
   minDamage: 10
   maxDamage: 30
-  chargeUpTime: 7
+  chargeUpTime: 2
   chargeHoldTime: 4
-  attackKnockbackForceMultiplier: 1
+  attackKnockbackForceMultiplier: 4
 --- !u!114 &8330503063304616271
 MonoBehaviour:
   m_ObjectHideFlags: 0

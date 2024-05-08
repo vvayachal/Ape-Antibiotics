@@ -833,6 +833,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1794782406}
+    - target: {fileID: 8434591803098887639, guid: 5fc4ea5f06984c84c8bf2130883eba42, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8434591803098887647, guid: 5fc4ea5f06984c84c8bf2130883eba42, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -1589,10 +1593,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8434591801114465021, guid: 5fc4ea5f06984c84c8bf2130883eba42, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -6629797300637803691, guid: 1174e251c3745a041885b7d9ea28635a, type: 3}
     - target: {fileID: 8434591803098887632, guid: 5fc4ea5f06984c84c8bf2130883eba42, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1794782406}
+    - target: {fileID: 8434591803098887633, guid: 5fc4ea5f06984c84c8bf2130883eba42, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8434591803098887647, guid: 5fc4ea5f06984c84c8bf2130883eba42, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -2725,6 +2737,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1794782406}
+    - target: {fileID: 8434591803098887639, guid: 5fc4ea5f06984c84c8bf2130883eba42, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8434591803098887647, guid: 5fc4ea5f06984c84c8bf2130883eba42, type: 3}
       propertyPath: m_RootOrder
       value: 6

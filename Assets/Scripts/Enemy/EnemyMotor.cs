@@ -51,6 +51,7 @@ public class EnemyMotor : MonoBehaviour, IKnockable
     {
         if (!_isKnocked)
             EngageTarget();
+        distanceToTarget = Vector3.Distance(transform.position, target.position);
     }
 
     private void OnCollisionEnter(Collision collision)
