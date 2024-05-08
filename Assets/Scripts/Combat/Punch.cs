@@ -18,8 +18,8 @@ public class Punch : MonoBehaviour
     [Tooltip("The cooldown of the attack.")]
     [SerializeField] float attackCooldown = 1f;
 
-    [Tooltip("The amount of damage the attack does.")]
-    [SerializeField] float damage = 10f;
+    [Tooltip("The amount of currentDamage the attack does.")]
+    [SerializeField] float damageMultiplier = 1.2f;
 
     [Tooltip("The amount of knockback applied to the enemy.")]
     [SerializeField] float knockbackForce;
@@ -28,6 +28,7 @@ public class Punch : MonoBehaviour
 
     // References
     private Animator anim;
+    private Rigidbody playerRigidbody;
 
     // Variables
     private bool canPunch = true;
@@ -37,6 +38,7 @@ public class Punch : MonoBehaviour
     {
         // Assign the components
         anim = GetComponent<Animator>();
+        playerRigidbody = GetComponent<Rigidbody>();
 
         // Assign the coroutine duration
         punchCooldownSeconds = new WaitForSeconds(attackCooldown);
@@ -56,9 +58,10 @@ public class Punch : MonoBehaviour
         anim.SetTrigger("Punch");
 
         // Detect enemies in range of attack
-        Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position,
-                                                        attackRange,
-                                                        affectedLayers);
+        Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, affectedLayers);
+
+        // Calulate the Damage this attack does
+        float currentDamage = playerRigidbody.velocity.magnitude * damageMultiplier;
 
         // Damage them
         foreach (Collider enemy in hitEnemies)
@@ -70,13 +73,14 @@ public class Punch : MonoBehaviour
             Debug.Log($"{this.name} has punched {enemy.name}");
             if (enemy.gameObject.TryGetComponent<EnemyHealth>(out var enemyHealth))
             {
-                enemyHealth.TakeDamage(damage);
+                enemyHealth.TakeDamage(currentDamage);
             }
 
             // Knock them back - Now uses the IKnockable interface
             if (enemy.gameObject.TryGetComponent<IKnockable>(out var knockable))
             {
                 knockable.KnockBack(attackPoint.position, knockbackForce);
+
             }
         }
     }

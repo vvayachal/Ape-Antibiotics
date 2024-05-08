@@ -28,6 +28,9 @@ public class EnemyMotor : MonoBehaviour, IKnockable
     [Tooltip("Controls how much knockback force is applied to this specific enemy (Lower is lighter)."), Range(0.2f, 6f)]
     [SerializeField] float _knockbackForceMultplier = 1f;
 
+    [Tooltip("Layer(s) the enemy considers as walkable.")]
+    [SerializeField] LayerMask _walkableLayer;
+
     //----------
 
     // Manages state of knockback
@@ -37,6 +40,8 @@ public class EnemyMotor : MonoBehaviour, IKnockable
     {
         // Search for the player
         target = GameObject.FindGameObjectWithTag("Player").transform;
+
+        // Assign component references
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>();
@@ -50,7 +55,7 @@ public class EnemyMotor : MonoBehaviour, IKnockable
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag("Level") && _isKnocked)
+        if (LayerMaskExtensions.IsLayerInMask(_walkableLayer, collision.gameObject.layer))
         {
             Recover();
         }
