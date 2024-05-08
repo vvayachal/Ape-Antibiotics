@@ -4,61 +4,100 @@ using UnityEngine;
 
 public class Punch : MonoBehaviour
 {
+    // All of there variables can be refactored into a scriptable object to save on memory [Tegomlee]
+
+    [Tooltip("The point where the attack originates from.")]
+    [SerializeField] Transform attackPoint;
+
+    [Tooltip("The size of the collision hitbox for the attack.")]
+    [SerializeField] float attackRange = 0.5f;
+
+    [Tooltip("The layers affected by the attack.")]
+    [SerializeField] LayerMask affectedLayers;
+
+    [Tooltip("The cooldown of the attack.")]
+    [SerializeField] float attackCooldown = 1f;
+
+    [Tooltip("The amount of damage the attack does.")]
+    [SerializeField] float damage = 10f;
+
+    [Tooltip("The amount of knockback applied to the enemy.")]
+    [SerializeField] float knockbackForce;
+
+    //----------
+
+    // References
     private Animator anim;
-    private Knockback knockb;
-    public Transform attackPoint;
-    public float attackRange = 0.5f;
-    public LayerMask enemyLayers;
 
-    float lastfired;
-    public float FireRate = 20f;
-    public float damage = 10f;
-    
+    // Variables
+    private bool canPunch = true;
+    private WaitForSeconds punchCooldownSeconds;
 
-
-    void Start()
+    void Awake()
     {
+        // Assign the components
         anim = GetComponent<Animator>();
-        knockb = GetComponent<Knockback>();
+
+        // Assign the coroutine duration
+        punchCooldownSeconds = new WaitForSeconds(attackCooldown);
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && canPunch)
         {
-            StartPunch();
+            StartCoroutine(PunchCoolDown());
         }
     }
 
-    public void StartPunch()
+    private void StartPunch()
     {
-        if (Time.time - lastfired > 1 / FireRate)
+        // Play attack animation
+        anim.SetTrigger("Punch");
+
+        // Detect enemies in range of attack
+        Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position,
+                                                        attackRange,
+                                                        affectedLayers);
+
+        // Damage them
+        foreach (Collider enemy in hitEnemies)
         {
-            lastfired = Time.time;
+            // pretty inefficient because we're using
+            // getcomponent twice but idk how to really optimize this
 
-            // Play attack animation
-            anim.SetTrigger("Punch");
-
-            // Detect enemies in range of attack
-            Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
-
-            // Damage them
-            foreach(Collider enemy in hitEnemies)
+            // Refactored to use TryGetComponent instead, Could further refactor with an interface or abstract class [Tegomlee]
+            Debug.Log($"{this.name} has punched {enemy.name}");
+            if (enemy.gameObject.TryGetComponent<EnemyHealth>(out var enemyHealth))
             {
-                // pretty inefficient because we're using
-                // getcomponent twice but idk how to really optimize this
-                Debug.Log($"{this.name} has punched {enemy.name}");
-                if (enemy.gameObject.GetComponent<EnemyHealth>() != null)
-                {
-                    enemy.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage);
-                }
+                enemyHealth.TakeDamage(damage);
+            }
 
-                // Knock them back
-                StartCoroutine(knockb.ApplyKnockBack(enemy, attackPoint.position, damage));
+            // Knock them back - Now uses the IKnockable interface
+            if (enemy.gameObject.TryGetComponent<IKnockable>(out var knockable))
+            {
+                knockable.KnockBack(attackPoint.position, knockbackForce);
             }
         }
     }
-    
+
+    private IEnumerator PunchCoolDown()
+    {
+        // Set punch state
+        canPunch = false;
+
+        // Activate the punch
+        StartPunch();
+
+        // Perform the cooldown
+        yield return punchCooldownSeconds;
+
+        // Reset the punch state
+        canPunch = true;
+    }
+
+
+
 
 
     private void OnDrawGizmosSelected()

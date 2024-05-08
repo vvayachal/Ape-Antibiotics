@@ -98,7 +98,7 @@ public class Grappling : MonoBehaviour
         joint = pm.gameObject.AddComponent<SpringJoint>();
         joint.autoConfigureConnectedAnchor = false;
         joint.connectedAnchor = grapplePoint;
-        joint.connectedBody = rb;
+        //joint.connectedBody = rb;
 
         float distanceFromPoint = Vector3.Distance(a: pm.gameObject.transform.position, b: grapplePoint);
 
