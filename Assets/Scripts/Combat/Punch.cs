@@ -31,7 +31,7 @@ public class Punch : MonoBehaviour
     [SerializeField] float chargeHoldTime;
 
     [Tooltip("The amount of knockback applied to the enemy.")]
-    [SerializeField] float knockbackForce;
+    [SerializeField] float attackKnockbackForceMultiplier;
 
     //----------
 
@@ -138,8 +138,9 @@ public class Punch : MonoBehaviour
             // Knock them back - Now uses the IKnockable interface
             if (enemy.gameObject.TryGetComponent<IKnockable>(out var knockable))
             {
-                knockable.KnockBack(attackPoint.position, knockbackForce);
-                // Could implement a knockback is based on charged up damage [Tegomlee]
+                // Knocks the enemy based on multiple factors
+                float finalKnockbackValue = attackKnockbackForceMultiplier * damageBasedOnCharge;
+                knockable.KnockBack(attackPoint.position, finalKnockbackValue);
             }
         }
 
