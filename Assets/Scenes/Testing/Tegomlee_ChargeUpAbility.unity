@@ -5995,13 +5995,13 @@ MonoBehaviour:
   attackRange: 3.2
   affectedLayers:
     serializedVersion: 2
-    m_Bits: 0
-  attackCooldown: 1
+    m_Bits: 128
+  attackCooldown: 0
   minDamage: 10
   maxDamage: 30
   chargeUpTime: 7
   chargeHoldTime: 4
-  knockbackForce: 30
+  attackKnockbackForceMultiplier: 1
 --- !u!114 &8330503063304616271
 MonoBehaviour:
   m_ObjectHideFlags: 0
