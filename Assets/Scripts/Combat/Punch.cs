@@ -18,50 +18,109 @@ public class Punch : MonoBehaviour
     [Tooltip("The cooldown of the attack.")]
     [SerializeField] float attackCooldown = 1f;
 
-    [Tooltip("The amount of currentDamage the attack does.")]
-    [SerializeField] float damageMultiplier = 1.2f;
+    [Tooltip("The minimum amount of damage the attack does.")]
+    [SerializeField] float minDamage = 10f;
+
+    [Tooltip("The maximum amount of damage the attack does.")]
+    [SerializeField] float maxDamage = 30f;
+
+    [Tooltip("How fast (in seconds) the damage reaches its maximum.")]
+    [SerializeField] float chargeUpTime;
+
+    [Tooltip("How long (in seconds) can the player maintain the charge before it automatically punches.")]
+    [SerializeField] float chargeHoldTime;
 
     [Tooltip("The amount of knockback applied to the enemy.")]
-    [SerializeField] float knockbackForce;
+    [SerializeField] float attackKnockbackForceMultiplier;
 
     //----------
 
     // References
     private Animator anim;
-    private Rigidbody playerRigidbody;
 
     // Variables
     private bool canPunch = true;
+    private bool isChargingUp = false;
+
     private WaitForSeconds punchCooldownSeconds;
+
+    private float damageBasedOnCharge;
+    private float timeSinceChargeUpStarted = 0f;
+
+    //----------
 
     void Awake()
     {
         // Assign the components
         anim = GetComponent<Animator>();
-        playerRigidbody = GetComponent<Rigidbody>();
 
         // Assign the coroutine duration
         punchCooldownSeconds = new WaitForSeconds(attackCooldown);
+
+        // Assign damageBasedOnCharge
+        damageBasedOnCharge = minDamage;
     }
 
     void Update()
     {
+        // Checks whether the player can begin charging up
         if (Input.GetMouseButtonDown(0) && canPunch)
         {
-            StartCoroutine(PunchCoolDown());
+            // Set the states
+            canPunch = false;
+            isChargingUp = true;
+
+            // Fire the charge up event as true;
+            EventManager.InvokeChargeUpEvent(isChargingUp);
+        }
+
+        // Checks whether the player can perform the punch
+        // (Allows the player to punch without having to wait for the full charge)
+        if (Input.GetMouseButtonUp(0) && isChargingUp)
+        {
+            PerformPunch();
+        }
+
+        ChargeUpPunch();
+    }
+
+    //TODO: Implement the ChargeUpEvent to this script to fire the events.
+    //TODO: Implement a ChargeUpMethod.
+    //TODO: Change StartPunch To PerformPunch and call the coroutine at the end of this method instead.
+
+    private void ChargeUpPunch()
+    {
+        if (isChargingUp)
+        {
+            // Increase the time since the charge up started
+            timeSinceChargeUpStarted += Time.deltaTime;
+
+            // Calculate the charge progress
+            float chargeProgress = Mathf.Clamp01(timeSinceChargeUpStarted / chargeUpTime);
+
+            // Calculate the damage based on charge progress
+            damageBasedOnCharge = Mathf.Lerp(minDamage, maxDamage, chargeProgress);
+
+            // Check to see whether the player has held the charge up for too long
+            if (timeSinceChargeUpStarted >= (chargeUpTime + chargeHoldTime))
+            {
+                PerformPunch();
+            }
         }
     }
 
-    private void StartPunch()
+    private void PerformPunch()
     {
+        // Reset isCharging
+        isChargingUp = false;
+
         // Play attack animation
         anim.SetTrigger("Punch");
 
         // Detect enemies in range of attack
-        Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, affectedLayers);
-
-        // Calulate the Damage this attack does
-        float currentDamage = playerRigidbody.velocity.magnitude * damageMultiplier;
+        Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position,
+                                                        attackRange,
+                                                        affectedLayers);
 
         // Damage them
         foreach (Collider enemy in hitEnemies)
@@ -73,30 +132,29 @@ public class Punch : MonoBehaviour
             Debug.Log($"{this.name} has punched {enemy.name}");
             if (enemy.gameObject.TryGetComponent<EnemyHealth>(out var enemyHealth))
             {
-                enemyHealth.TakeDamage(currentDamage);
+                enemyHealth.TakeDamage(damageBasedOnCharge);
             }
 
             // Knock them back - Now uses the IKnockable interface
             if (enemy.gameObject.TryGetComponent<IKnockable>(out var knockable))
             {
-                knockable.KnockBack(attackPoint.position, knockbackForce);
-
+                // Knocks the enemy based on multiple factors
+                float finalKnockbackValue = attackKnockbackForceMultiplier * damageBasedOnCharge;
+                knockable.KnockBack(attackPoint.position, finalKnockbackValue);
             }
         }
+
+        StartCoroutine(PunchCoolDown());
     }
 
     private IEnumerator PunchCoolDown()
     {
-        // Set punch state
-        canPunch = false;
-
-        // Activate the punch
-        StartPunch();
-
         // Perform the cooldown
         yield return punchCooldownSeconds;
 
-        // Reset the punch state
+        // Clean up the states and values
+        timeSinceChargeUpStarted = 0f;
+        damageBasedOnCharge = 0f;
         canPunch = true;
     }
 
