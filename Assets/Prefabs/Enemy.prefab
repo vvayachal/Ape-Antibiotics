@@ -415,6 +415,9 @@ MonoBehaviour:
   chaseRange: 83.18
   _isKnockbackable: 1
   _knockbackForceMultplier: 1
+  _walkableLayer:
+    serializedVersion: 2
+    m_Bits: 448
 --- !u!114 &8434591803098887635
 MonoBehaviour:
   m_ObjectHideFlags: 0
