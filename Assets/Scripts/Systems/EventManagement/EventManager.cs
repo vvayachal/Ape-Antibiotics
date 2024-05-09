@@ -10,9 +10,9 @@ using UnityEngine;
 public static class EventManager
 {
     /// <summary>
-    /// Event that manages the players charge up state.
+    /// Event that manages the player's charge up state.
     /// </summary>
-    private static event Action<bool> ChargeUpEvent;
+    private static event Action<bool> chargeUpEvent;
 
     /// <summary>
     /// Subscribe to the charge up event.
@@ -20,7 +20,7 @@ public static class EventManager
     /// <param name="action">The method that will subscribe to the event. The method must have only one parameter and it must be a bool.</param>
     public static void SubscribeToChargeUpEvent(Action<bool> action)
     {
-        ChargeUpEvent += action;
+        chargeUpEvent += action;
     }
 
     /// <summary>
@@ -30,15 +30,15 @@ public static class EventManager
 
     public static void UnsubscribeToChargeUpEvent(Action<bool> action)
     {
-        ChargeUpEvent -= action;
+        chargeUpEvent -= action;
     }
 
     /// <summary>
-    /// Invoke the ChargeUpEvent.
+    /// Invoke the chargeUpEvent.
     /// </summary>
     /// <param name="isCharging">The bool that determines whether the event is true or false.</param>
     public static void InvokeChargeUpEvent(bool isCharging)
     {
-        ChargeUpEvent?.Invoke(isCharging);
+        chargeUpEvent?.Invoke(isCharging);
     }
 }

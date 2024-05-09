@@ -92,7 +92,7 @@ public class EnemyMotor : MonoBehaviour, IKnockable
     {
         if (target == null) { return; }
 
-        target.GetComponentInParent<Shield>().TakeDamage(10f);
+        target.GetComponentInParent<PlayerShield>().TakeDamage(10f);
         Debug.Log($"{this.name} has attacked {target.name}");
     }
 

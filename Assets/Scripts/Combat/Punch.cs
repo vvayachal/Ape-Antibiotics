@@ -84,7 +84,7 @@ public class Punch : MonoBehaviour
         ChargeUpPunch();
     }
 
-    //TODO: Implement the ChargeUpEvent to this script to fire the events.
+    //TODO: Implement the chargeUpEvent to this script to fire the events.
     //TODO: Implement a ChargeUpMethod.
     //TODO: Change StartPunch To PerformPunch and call the coroutine at the end of this method instead.
 
