@@ -2103,15 +2103,33 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
+    - m_Text: Ultra
+      m_Image: {fileID: 0}
+    - m_Text: Very High
+      m_Image: {fileID: 0}
     - m_Text: High
       m_Image: {fileID: 0}
     - m_Text: Medium
       m_Image: {fileID: 0}
     - m_Text: Low
       m_Image: {fileID: 0}
+    - m_Text: Very Low
+      m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1037952106}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: SetQuality
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &853175901
 MonoBehaviour:
@@ -2728,8 +2746,8 @@ MonoBehaviour:
   mainMenu: {fileID: 1226518912}
   settings: {fileID: 1109717820}
   credits: {fileID: 362347877}
-  MusicMixer: {fileID: 24100000, guid: cf367a3a01b6d034d9eca7d1e08aab71, type: 2}
-  SFXMixer: {fileID: 24100000, guid: dc2e0b2d1b603454193dba3a44784b7c, type: 2}
+  musicMixer: {fileID: 24100000, guid: cf367a3a01b6d034d9eca7d1e08aab71, type: 2}
+  sfxMixer: {fileID: 24100000, guid: dc2e0b2d1b603454193dba3a44784b7c, type: 2}
 --- !u!1 &1091171314
 GameObject:
   m_ObjectHideFlags: 0
@@ -6426,7 +6444,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: High
+  m_text: Ultra
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1544e450accd12440a563bf9e5654692, type: 2}
   m_sharedMaterial: {fileID: 2454271887129277973, guid: 1544e450accd12440a563bf9e5654692, type: 2}

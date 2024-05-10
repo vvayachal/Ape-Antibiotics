@@ -21,8 +21,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject settings;
     [SerializeField] private GameObject credits;
-    [SerializeField] private AudioMixer MusicMixer;
-    [SerializeField] private AudioMixer SFXMixer;
+    [SerializeField] private AudioMixer musicMixer;
+    [SerializeField] private AudioMixer sfxMixer;
 
     //============================= UI Manager ====================================
     // Start is called before the first frame update
@@ -60,12 +60,17 @@ public class UIManager : MonoBehaviour
     //=========================== Settings ===================================
     public void SetMusicVolume(float volume)
     {
-        MusicMixer.SetFloat("volume", volume);
+        musicMixer.SetFloat("volume", volume);
     }
     
     public void SetSFXVolume(float volume)
     {
-        SFXMixer.SetFloat("volume", volume);
+        sfxMixer.SetFloat("volume", volume);
+    }
+
+    public void SetQuality(int qualityIndex)
+    {
+        QualitySettings.SetQualityLevel(qualityIndex);
     }
 
     //============================= Scene ====================================
