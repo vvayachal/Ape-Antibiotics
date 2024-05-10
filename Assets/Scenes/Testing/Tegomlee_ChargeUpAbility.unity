@@ -5878,6 +5878,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxShieldHealth: 100
+  timeBeforeRecharge: 3
+  shieldRechargeRate: 7
   inflictDamageKey: 116
 --- !u!114 &8330503063304616269
 MonoBehaviour:

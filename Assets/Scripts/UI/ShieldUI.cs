@@ -21,7 +21,7 @@ public class ShieldUI : MonoBehaviour
 
     private void UpdateShield(float currentHealth, float maxHealth)
     {
-        shieldText.text = $"Shield: {currentHealth}";
+        shieldText.text = $"Shield: {Mathf.Round(currentHealth)}";
         shieldBar.fillAmount = currentHealth / maxHealth;
     }
 }
