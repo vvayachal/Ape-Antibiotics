@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 
 public class UIManager : MonoBehaviour
 {
@@ -21,8 +20,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject settings;
     [SerializeField] private GameObject credits;
-    [SerializeField] private AudioMixer musicMixer;
-    [SerializeField] private AudioMixer sfxMixer;
 
     //============================= UI Manager ====================================
     // Start is called before the first frame update
@@ -55,22 +52,6 @@ public class UIManager : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
-    }
-
-    //=========================== Settings ===================================
-    public void SetMusicVolume(float volume)
-    {
-        musicMixer.SetFloat("volume", volume);
-    }
-    
-    public void SetSFXVolume(float volume)
-    {
-        sfxMixer.SetFloat("volume", volume);
-    }
-
-    public void SetQuality(int qualityIndex)
-    {
-        QualitySettings.SetQualityLevel(qualityIndex);
     }
 
     //============================= Scene ====================================

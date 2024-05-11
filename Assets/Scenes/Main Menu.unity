@@ -1055,7 +1055,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2079360791}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.76666665
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2496,6 +2496,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1037952105}
   - component: {fileID: 1037952106}
+  - component: {fileID: 1013172257}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -2503,6 +2504,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1013172257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1013172256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bec64e5a63194c4f8526859fd2364ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicMixer: {fileID: 24100000, guid: cf367a3a01b6d034d9eca7d1e08aab71, type: 2}
+  sfxMixer: {fileID: 24100000, guid: dc2e0b2d1b603454193dba3a44784b7c, type: 2}
 --- !u!1 &1026177641
 GameObject:
   m_ObjectHideFlags: 0
@@ -2746,8 +2761,6 @@ MonoBehaviour:
   mainMenu: {fileID: 1226518912}
   settings: {fileID: 1109717820}
   credits: {fileID: 362347877}
-  musicMixer: {fileID: 24100000, guid: cf367a3a01b6d034d9eca7d1e08aab71, type: 2}
-  sfxMixer: {fileID: 24100000, guid: dc2e0b2d1b603454193dba3a44784b7c, type: 2}
 --- !u!1 &1091171314
 GameObject:
   m_ObjectHideFlags: 0
