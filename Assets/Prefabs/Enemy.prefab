@@ -417,7 +417,7 @@ MonoBehaviour:
   _knockbackForceMultplier: 1
   _walkableLayer:
     serializedVersion: 2
-    m_Bits: 448
+    m_Bits: 64
 --- !u!114 &8434591803098887635
 MonoBehaviour:
   m_ObjectHideFlags: 0

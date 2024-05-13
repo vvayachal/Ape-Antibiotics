@@ -40,6 +40,11 @@ public class GrabAndChuck : MonoBehaviour
     //----------------------------
 
     [Header("Chucking Attributes")]
+
+    [Tooltip("The point from which the enemy is thrown from.")]
+    [SerializeField] private Transform _chuckPoint;
+
+    [Tooltip("How much force the chuck is.")]
     [SerializeField] private float _chuckForce;
 
     //----------------------------
@@ -119,13 +124,17 @@ public class GrabAndChuck : MonoBehaviour
         Destroy(_currentHeldCloneObject);
 
         // Restore the original object and set its transform
-        _currentHeldObject.transform.position = _holdPoint.position;
+        _currentHeldObject.transform.position = _chuckPoint.position;
         _currentHeldObject.transform.rotation = currentRotation;
         _currentHeldObject.SetActive(true);
 
+        // Prepare the enemy for knockback
+        // This solution isn't great, will refactor if necessary [Tegomlee].
+        _currentHeldObject.GetComponent<EnemyMotor>().PrepareEnemyForKnockback();
+
         // Apply the "Knockback"
-        Knockback knockback = GetComponent<Knockback>();
-        StartCoroutine(knockback.ApplyKnockBack(_currentHeldObject.GetComponent<CapsuleCollider>(), _holdPoint.position, _chuckForce));
+        Collider currentCollider = _currentHeldObject.GetComponent<Collider>();
+        Knockback.Instance.PerformKnockback(currentCollider, _holdPoint.position, _chuckForce);
 
         // Reset the class state
         _currentHeldObject = null;
