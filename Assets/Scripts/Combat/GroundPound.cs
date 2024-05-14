@@ -58,7 +58,7 @@ public class GroundPound : MonoBehaviour
         } else
         {
             cooldown = 0;
-            Debug.Log("Ground pound is ready to be used!");
+            //Debug.Log("Ground pound is ready to be used!");
         }
 }
 

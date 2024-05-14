@@ -68,6 +68,9 @@ public class PlayerShield : MonoBehaviour, IDamageable
     {
         // Take damage
         currentShieldHealth -= damage;
+        
+        // Debugging 
+        Debug.Log("Shield Health - " + currentShieldHealth.ToString());
 
         // Check for state
         if (currentShieldHealth <= 0f) 
@@ -111,5 +114,18 @@ public class PlayerShield : MonoBehaviour, IDamageable
         {
             TakeDamage(10f);
         }
+    }
+
+    public float GetShieldHealth()
+    {
+        //Debug.Log("Get Shield Health - " + currentShieldHealth.ToString());
+        return currentShieldHealth;
+    }
+
+    public void SetShieldHealth(float shieldHealth)
+    {
+        currentShieldHealth = shieldHealth;
+
+        //Debug.Log("Set Shield Health - "+shieldHealth.ToString());
     }
 }

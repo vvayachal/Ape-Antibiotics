@@ -835,7 +835,7 @@ PrefabInstance:
       objectReference: {fileID: 1794782406}
     - target: {fileID: 8434591803098887639, guid: 5fc4ea5f06984c84c8bf2130883eba42, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8434591803098887647, guid: 5fc4ea5f06984c84c8bf2130883eba42, type: 3}
       propertyPath: m_RootOrder
@@ -2070,7 +2070,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 025a5ee438fdbf84d8969270945d5bb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shieldHealth: 0
 --- !u!114 &1548232954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2739,7 +2738,7 @@ PrefabInstance:
       objectReference: {fileID: 1794782406}
     - target: {fileID: 8434591803098887639, guid: 5fc4ea5f06984c84c8bf2130883eba42, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8434591803098887647, guid: 5fc4ea5f06984c84c8bf2130883eba42, type: 3}
       propertyPath: m_RootOrder
