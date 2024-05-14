@@ -1667,6 +1667,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 687268092}
     m_Modifications:
+    - target: {fileID: -1072675694215300026, guid: 5fc4ea5f06984c84c8bf2130883eba42, type: 3}
+      propertyPath: knockbackForceAmount
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: -1072675694215300026, guid: 5fc4ea5f06984c84c8bf2130883eba42, type: 3}
+      propertyPath: timeBetweenDamageTicks
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: -1072675694215300026, guid: 5fc4ea5f06984c84c8bf2130883eba42, type: 3}
+      propertyPath: knockoutForceMultiplier
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 8434591801114465010, guid: 5fc4ea5f06984c84c8bf2130883eba42, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -3602,28 +3614,11 @@ PrefabInstance:
       propertyPath: speedText
       value: 
       objectReference: {fileID: 324748298}
-    - target: {fileID: 3251798768136653142, guid: ea728c3712d57fa4fb0af7e5ed95c46a, type: 3}
-      propertyPath: chargeUpTime
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3251798768136653142, guid: ea728c3712d57fa4fb0af7e5ed95c46a, type: 3}
-      propertyPath: chargeHoldTime
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3251798768136653142, guid: ea728c3712d57fa4fb0af7e5ed95c46a, type: 3}
-      propertyPath: attackKnockbackForceMultiplier
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 3251798768136653148, guid: ea728c3712d57fa4fb0af7e5ed95c46a, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 3251798768136653149, guid: ea728c3712d57fa4fb0af7e5ed95c46a, type: 3}
-      propertyPath: _chuckForce
-      value: 60
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea728c3712d57fa4fb0af7e5ed95c46a, type: 3}
 --- !u!4 &8330503063304616264 stripped
 Transform:

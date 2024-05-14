@@ -361,6 +361,7 @@ GameObject:
   - component: {fileID: 8434591803098887633}
   - component: {fileID: 8434591803098887634}
   - component: {fileID: 8434591803098887645}
+  - component: {fileID: -1072675694215300026}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -414,10 +415,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chaseRange: 83.18
   _isKnockbackable: 1
-  _knockbackForceMultplier: 1
   _walkableLayer:
     serializedVersion: 2
     m_Bits: 64
+  _knockbackRecoverTime: 3
 --- !u!114 &8434591803098887635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -489,3 +490,20 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-1072675694215300026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8434591803098887639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c3dadb8a99020a4d8d05d98b27bcc8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  affectedLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  amountOfDamage: 10
+  knockbackForceAmount: 10

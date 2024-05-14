@@ -23,6 +23,9 @@ public class PlayerShield : MonoBehaviour, IDamageable
     // Events
     public static event Action<float, float> ShieldChangedEvent;
 
+    // Interface implementations
+    public float CurrentHealth { get { return currentShieldHealth; } }
+
     //----------
 
     [Header("Debugging")]

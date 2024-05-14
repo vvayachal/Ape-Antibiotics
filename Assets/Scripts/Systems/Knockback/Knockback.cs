@@ -29,7 +29,7 @@ public class Knockback : MonoBehaviour
             instance = this;
     }
 
-    public void PerformKnockback(Collider affectedCollider, Vector3 originOfForcePosition, float knockbackForce)
+    public void PerformKnockback(Collider affectedCollider, Vector3 originOfForcePosition, float knockbackForce, bool isModified = false)
     {
         // Check if the collider has an attached rigidbody
         if (affectedCollider.TryGetComponent(out Rigidbody affectedRigidBody))
@@ -37,9 +37,12 @@ public class Knockback : MonoBehaviour
             // Get the affected collider's position
             Vector3 affectedColliderPosition = affectedRigidBody.position;
 
-            // Calculate the direction of the knockback and normalize it
-            Vector3 directionOfForce = affectedColliderPosition - originOfForcePosition;
-            directionOfForce.Normalize();
+            // Get the direction of the force
+            Vector3 directionOfForce = CalculatedDirection(affectedColliderPosition, originOfForcePosition);
+
+            // Modify the vector if necessary
+            if (isModified)
+                directionOfForce += Vector3.up;
 
             // Disable conflicting components
             SetComponentState(affectedCollider, false);
@@ -65,5 +68,14 @@ public class Knockback : MonoBehaviour
         {
             affectedNavMeshAgent.enabled = activeState;
         }
+    }
+
+    private Vector3 CalculatedDirection(Vector3 targetPosition, Vector3 originPosition)
+    {
+        // Calculate the direction of the knockback and normalize it
+        Vector3 direction = targetPosition - originPosition;
+        direction.Normalize();
+
+        return direction;
     }
 }
