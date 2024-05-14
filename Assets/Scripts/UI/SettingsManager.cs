@@ -11,7 +11,7 @@ public class SettingsManager : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(this);
-    }
+    } 
 
     public void SetMusicVolume(float volume)
     {

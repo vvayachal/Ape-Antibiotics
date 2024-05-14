@@ -53,10 +53,4 @@ public class UIManager : MonoBehaviour
     {
         Application.Quit();
     }
-
-    //============================= Scene ====================================
-    public void LoadNewScene(int sceneNumber)
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneNumber);
-    }
 }
