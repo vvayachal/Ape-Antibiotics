@@ -6,17 +6,16 @@ using UnityEngine.UI;
 // I renamed the class to better describe its functionality [Tegomlee]
 public class ShieldUI : MonoBehaviour
 {
-    private Text shieldText;
-    private Image shieldBar;
+    [Tooltip("The text component attached to the Shield UI.")]
+    [SerializeField] Text shieldText;
+
+    [Tooltip("The image that represents the Shield UI.")]
+    [SerializeField] Image shieldBar;
 
     private void Awake()
     {
         // Subscribe to events
         PlayerShield.ShieldChangedEvent += UpdateShield;
-
-        // Set references
-        shieldText = GameObject.Find("ShieldText").GetComponent<Text>();
-        shieldBar = GameObject.Find("ShieldBar").GetComponent<Image>();
     }
 
     private void UpdateShield(float currentHealth, float maxHealth)
