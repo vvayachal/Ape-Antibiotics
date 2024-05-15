@@ -15,8 +15,8 @@ public class ShieldUI : MonoBehaviour
         PlayerShield.ShieldChangedEvent += UpdateShield;
 
         // Set references
-        shieldText = GameObject.Find("ShieldText").GetComponent<Text>();
-        shieldBar = GameObject.Find("ShieldBar").GetComponent<Image>();
+        shieldText = GameObject.Find("Shield Text").GetComponent<Text>();
+        shieldBar = GameObject.Find("Shield Bar").GetComponent<Image>();
     }
 
     private void UpdateShield(float currentHealth, float maxHealth)
