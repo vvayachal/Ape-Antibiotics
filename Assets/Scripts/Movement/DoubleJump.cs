@@ -16,12 +16,13 @@ public class DoubleJump : MonoBehaviour
     Grappling grapple;
 
     float groundDistance = 0.4f;
-    public float jumpForce = 5f;
+    float jumpForce; // Same jump force as jump force from PlayerMovement script - azicii
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         pm = GetComponent<PlayerMovement>();
+        jumpForce = GetComponent<PlayerMovement>().jumpForce;
 
         groundCheck.gameObject.SetActive(false);
     }
