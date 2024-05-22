@@ -15,13 +15,15 @@ public class ShieldUI : MonoBehaviour
         PlayerShield.ShieldChangedEvent += UpdateShield;
 
         // Set references
-        shieldText = GameObject.Find("Shield Text").GetComponent<Text>();
+        shieldText = GameObject.Find("Shield Health").GetComponent<Text>();
         shieldBar = GameObject.Find("Shield Bar").GetComponent<Image>();
     }
 
     private void UpdateShield(float currentHealth, float maxHealth)
     {
-        shieldText.text = $"Shield: {Mathf.Round(currentHealth)}";
+        shieldText.text = Mathf.Round(currentHealth).ToString();
+        
         shieldBar.fillAmount = currentHealth / maxHealth;
+        int i;
     }
 }

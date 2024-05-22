@@ -31,7 +31,9 @@ public class JSONHandler : MonoBehaviour
                 return false;
             }
             copyPlayerData(playerData, fromJson);
-
+            
+            Debug.Log("Load Data - " + json);
+            
             return true;
         }
         else
@@ -45,6 +47,7 @@ public class JSONHandler : MonoBehaviour
     private static void copyPlayerData(PlayerData playerData, PlayerData fromJson)
     {
         playerData.shieldHealth = fromJson.shieldHealth;
+        playerData.score = fromJson.score;
     }
 
 }

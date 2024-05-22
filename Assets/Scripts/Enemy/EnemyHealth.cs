@@ -45,6 +45,10 @@ public class EnemyHealth : MonoBehaviour
         if (isDead) return;
 
         isDead = true;
+        
+        ScoreManager.Instance.Score();
+        Debug.Log("Score from Player Death. Score - "+ScoreManager.Instance.GetScore().ToString());
+        
         GetComponent<NavMeshAgent>().enabled = false;
         animator.SetTrigger("die");
         Destroy(gameObject, timeBeforeDestroy);

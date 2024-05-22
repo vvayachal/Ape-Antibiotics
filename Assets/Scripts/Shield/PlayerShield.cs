@@ -68,15 +68,18 @@ public class PlayerShield : MonoBehaviour, IDamageable
     {
         // Take damage
         currentShieldHealth -= damage;
-        
-        // Debugging 
-        Debug.Log("Shield Health - " + currentShieldHealth.ToString());
 
         // Check for state
         if (currentShieldHealth <= 0f) 
         {
             currentShieldHealth = 0f;
+            
+            // Debugging 
+            Debug.Log("Shield Health - " + currentShieldHealth.ToString());
+            
             isCracked = true;
+            
+            ScoreManager.Instance.DropCoins();
         }
         else
         {
@@ -128,4 +131,5 @@ public class PlayerShield : MonoBehaviour, IDamageable
 
         //Debug.Log("Set Shield Health - "+shieldHealth.ToString());
     }
+    
 }

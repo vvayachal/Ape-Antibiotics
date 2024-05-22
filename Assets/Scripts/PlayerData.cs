@@ -4,9 +4,11 @@ using System;
 public class PlayerData
 {
     public float shieldHealth;
+    public int score;
     
-    public PlayerData(float shieldHealth)
+    public PlayerData(float shieldHealth, int score)
     {
-        this .shieldHealth = shieldHealth;
+        this.shieldHealth = shieldHealth;
+        this.score = score;
     }
 }
