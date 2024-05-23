@@ -30,13 +30,15 @@ public class Grappling : MonoBehaviour
 
 
     [Header("Cooldown")]
-    public float grapplingCd;
-    private float grapplingCdTimer;
+    [Tooltip("The cooldown of the attack.")]
+    [SerializeField] float grapplingCd = 1f;
+    private WaitForSeconds grapplingCdTimer;
 
     [Header("Input")]
     public KeyCode grappleKey = KeyCode.R;
 
     public bool grappling;
+    private bool canGrapple = true;
 
     private RaycastHit savedHit;
 
@@ -46,12 +48,15 @@ public class Grappling : MonoBehaviour
         dj = GetComponent<DoubleJump>();
         rb = GetComponent<Rigidbody>();
         grappleGun.SetActive(false);
+
+        grapplingCdTimer = new WaitForSeconds(grapplingCd);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(grappleKey))
+        if (Input.GetKeyDown(grappleKey) && canGrapple)
         {
+            canGrapple = false;
             StartGrapple();
         }
         if (Input.GetKeyUp(grappleKey))
@@ -88,6 +93,16 @@ public class Grappling : MonoBehaviour
 
         lr.enabled = true;
         grappleGun.SetActive(true);
+
+        StartCoroutine(GrappleCooldown());
+    }
+
+    private IEnumerator GrappleCooldown()
+    {
+        // Perform the cooldown
+        yield return grapplingCdTimer;
+
+        canGrapple = true;
     }
 
     // change to fixed update
@@ -119,7 +134,6 @@ public class Grappling : MonoBehaviour
     {
         grappling = false;
         grappleGun.SetActive(false);
-        grapplingCdTimer = grapplingCd;
         lr.enabled = false;
         Destroy(joint);
 
