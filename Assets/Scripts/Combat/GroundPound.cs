@@ -12,7 +12,7 @@ public class GroundPound : MonoBehaviour
     //public float directRange;
     public float aoeRange;
 
-    float minCooldown = 0f;
+    //float minCooldown = 0f;
     public float maxCooldown = 5f;
     public float curCooldown;
     public float cooldown;

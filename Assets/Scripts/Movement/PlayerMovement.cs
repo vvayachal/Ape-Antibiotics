@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 slopeMoveDirection;
 
     Rigidbody rb;
+    Animator animator;
 
     RaycastHit slopeHit;
 
@@ -55,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         wr = GetComponent<WallRun>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -80,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
         if (jumpRequest)
         {
             Jump();
-
+            animator.SetTrigger("Jumping");
             jumpRequest = false;
         }
 
@@ -93,6 +95,16 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalMovement = Input.GetAxisRaw("Horizontal");
         verticalMovement = Input.GetAxisRaw("Vertical");
+
+        // Animator
+        if (horizontalMovement != 0 || verticalMovement != 0)
+        {
+            animator.SetBool("Running", true);
+        }
+        else
+        {
+            animator.SetBool("Running", false);
+        }
 
         moveDirection = (orientation.forward * verticalMovement) + (orientation.right * horizontalMovement);
     }

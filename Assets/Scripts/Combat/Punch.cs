@@ -52,7 +52,7 @@ public class Punch : MonoBehaviour
     void Awake()
     {
         // Assign the components
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
 
         // Assign the coroutine duration
         punchCooldownSeconds = new WaitForSeconds(attackCooldown);
@@ -92,6 +92,9 @@ public class Punch : MonoBehaviour
     {
         if (isChargingUp)
         {
+            //Set animator 
+            anim.SetBool("Charging", true);
+
             // Increase the time since the charge up started
             timeSinceChargeUpStarted += Time.deltaTime;
 
@@ -111,11 +114,15 @@ public class Punch : MonoBehaviour
 
     private void PerformPunch()
     {
+        // Set animator
+        anim.SetBool("Charging", false);
+        anim.SetTrigger("Punching");
+
         // Reset isCharging
         isChargingUp = false;
 
         // Play attack animation
-        anim.SetTrigger("Punch");
+        //anim.SetTrigger("Punch");
 
         // Detect enemies in range of attack
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position,
