@@ -79,11 +79,12 @@ public class EnemyMotor : MonoBehaviour
 
     void ChaseTarget()
     {
-        if (navMeshAgent.enabled)
+        if (navMeshAgent.enabled && !_isKnocked)
         {
             navMeshAgent.SetDestination(target.position);
             animator.SetBool("attack", false);
         }
+        else return;
     }
 
     void AttackTarget()

@@ -14,14 +14,17 @@ public class DoubleJump : MonoBehaviour
     PlayerMovement pm;
     Rigidbody rb;
     Grappling grapple;
+    Animator animator;
 
     float groundDistance = 0.4f;
-    public float jumpForce = 5f;
+    float jumpForce; // Same jump force as jump force from PlayerMovement script - azicii
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         pm = GetComponent<PlayerMovement>();
+        jumpForce = GetComponent<PlayerMovement>().jumpForce;
+        animator = GetComponentInChildren<Animator>();
 
         groundCheck.gameObject.SetActive(false);
     }
@@ -66,6 +69,7 @@ public class DoubleJump : MonoBehaviour
 
     void PerformDoubleJump()
     {
+        animator.SetTrigger("Jumping");
         rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
         groundCheck.gameObject.SetActive(false);
