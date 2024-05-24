@@ -19,7 +19,9 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject settings;
+    [SerializeField] private GameObject credits;
 
+    //============================= UI Manager ====================================
     // Start is called before the first frame update
     private void Start()
     {
@@ -33,21 +35,25 @@ public class UIManager : MonoBehaviour
     {
         mainMenu.SetActive(true);
         settings.SetActive(false);
+        credits.SetActive(false);
     }
 
     public void ShowSettings()
     {
         mainMenu.SetActive(false);
         settings.SetActive(true);
+        credits.SetActive(false);
+    }
+
+    public void ShowCredits()
+    {
+        mainMenu.SetActive(false);
+        settings.SetActive(false);
+        credits.SetActive(true);
     }
 
     public void ExitGame()
     {
         Application.Quit();
-    }
-
-    public void LoadNewScene(int sceneNumber)
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneNumber);
     }
 }
