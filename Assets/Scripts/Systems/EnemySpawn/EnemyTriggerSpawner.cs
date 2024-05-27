@@ -70,6 +70,7 @@ public class EnemyTriggerSpawner : MonoBehaviour
     /// </summary>
     private void SpawnEnemies()
     {
+        Debug.Log("Enemy Spawned");
         if (_spawnPoints == null) 
         {
             Debug.LogWarning("This trigger is not properly set up");

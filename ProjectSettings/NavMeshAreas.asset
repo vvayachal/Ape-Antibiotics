@@ -73,10 +73,10 @@ NavMeshProjectSettings:
   m_Settings:
   - serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 1
-    agentHeight: 2
-    agentSlope: 45
-    agentClimb: 0.75
+    agentRadius: 1.02
+    agentHeight: 1.96
+    agentSlope: 60
+    agentClimb: 20
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
@@ -108,5 +108,5 @@ NavMeshProjectSettings:
     debug:
       m_Flags: 0
   m_SettingNames:
-  - Humanoid
+  - Malignancy
   - New Agent
