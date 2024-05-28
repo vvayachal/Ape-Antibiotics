@@ -12,8 +12,11 @@ public class ScoreManager : MonoBehaviour
     [Tooltip("Reference to Score Value Object.")]
     [SerializeField] private Text scoreText;
 
-    [Tooltip("Set the number of coins to drop on death")] 
-    [SerializeField] private int coinsToDrop;
+    // [Tooltip("Set the number of coins to drop on object destruction")] 
+    // [SerializeField] private int coinsToDrop;
+    
+    [Tooltip("Set the number of coins to drop on Player Death")] 
+    [SerializeField] private int coinsToLose;
 
     [Tooltip("Coin Prefab")] 
     [SerializeField] private GameObject coin;
@@ -33,32 +36,42 @@ public class ScoreManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        scoreText.text = score.ToString();
-
-        if (playerShield.IsCracked)
-        {
-            
-        }
+        
+        
     }
     
     public void Score()
     {
         score += 1;
+        
+        scoreText.text = score.ToString();
     }
 
-    public void DropCoins()
+    /// <summary>
+    /// Make the player lose coins on death. Number of coins set from the inspector in Score Manager script.
+    /// </summary>
+    public void LoseCoins()
     {
-        if (score < coinsToDrop)
+        if (score < coinsToLose)
         {
-            coinsToDrop = score;
+            coinsToLose = score;
         }
-        score -= coinsToDrop;
-
+        score -= coinsToLose;
+        scoreText.text = score.ToString();
+        
+        DropCoins(coinsToLose, GameManager.Instance.getPlayerPosition());
+    }
+    
+    /// <summary>
+    /// Drops specified number of coins at specified location.
+    /// </summary>
+    /// <param name="coinsToDrop"> Number of coins to drop.</param>
+    /// <param name="dropPosition"> Position to drop the coins at.</param>
+    public void DropCoins( int coinsToDrop, Vector3 dropPosition)
+    {
         for (int i = 0; i < coinsToDrop; i++)
         {
-            Vector3 playerPosition = GameManager.Instance.getPlayerPosition();
-
-            Vector3 spawnPosition = new Vector3(Random.Range(playerPosition.x - 3, playerPosition.x + 3), playerPosition.y, Random.Range(playerPosition.z - 3, playerPosition.z + 3));
+            Vector3 spawnPosition = new Vector3(Random.Range(dropPosition.x - 3, dropPosition.x + 3), dropPosition.y, Random.Range(dropPosition.z - 3, dropPosition.z + 3));
             
             Instantiate(coin, spawnPosition, Quaternion.identity);
         }

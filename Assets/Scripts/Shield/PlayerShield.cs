@@ -79,7 +79,7 @@ public class PlayerShield : MonoBehaviour, IDamageable
             
             isCracked = true;
             
-            ScoreManager.Instance.DropCoins();
+            ScoreManager.Instance.LoseCoins();
         }
         else
         {
