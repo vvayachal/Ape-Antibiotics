@@ -84,6 +84,7 @@ public class WallRun : MonoBehaviour
     {
         if (wallRunRequest)
         {
+            GameManager.Instance.cameraLines.Play();
             StartWallRun();
 
             wallRunRequest = false;
@@ -98,6 +99,7 @@ public class WallRun : MonoBehaviour
 
         if (stopRunRequest)
         {
+            GameManager.Instance.cameraLines.Stop();
             StopWallRun();
 
             stopRunRequest = false;

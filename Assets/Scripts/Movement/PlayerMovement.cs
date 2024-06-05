@@ -134,10 +134,12 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(sprintKey) && isGrounded)
         {
             speed = Mathf.Lerp(speed, sprintSpeed, acceleration * Time.deltaTime);
+            GameManager.Instance.cameraLines.Play();
         }
         else
         {
             speed = Mathf.Lerp(speed, walkSpeed, acceleration * Time.deltaTime);
+            GameManager.Instance.cameraLines.Stop();
         }
     }
 

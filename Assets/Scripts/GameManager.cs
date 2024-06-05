@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     
-    public Settings settings;
+    [Tooltip("Reference to the Particle Effect for Speed Lines.")]
+    public ParticleSystem cameraLines;
     
     public static GameManager Instance;
     private void Awake()
@@ -15,18 +18,18 @@ public class GameManager : MonoBehaviour
        {
             Instance = this;
        }
+    
+       if (!cameraLines)
+       {
+           Debug.LogWarning("Please add reference to Camera Lines.");
+       }
     }
 
     
     // Start is called before the first frame update
     void Start()
     {
-      
-    }
-
-    private void init()
-    {
-
+        cameraLines.Stop();
     }
 
     // Update is called once per frame
