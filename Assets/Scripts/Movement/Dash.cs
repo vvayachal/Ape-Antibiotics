@@ -15,6 +15,7 @@ public class Dash : MonoBehaviour
     public float dashUpwardForce;
     public float dashDuration;
     bool dashRequest;
+    [HideInInspector] public bool canDash;
 
     [Header("Cooldown")]
     public float dashCd;
@@ -31,16 +32,27 @@ public class Dash : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(dashKey))
+        if (pm.isGrounded)
         {
-            GameManager.Instance.cameraLines.Play();
-            dashRequest = true;
-        }
+            canDash = true;
+            
+            if (Input.GetKeyDown(dashKey))
+            {
+                GameManager.Instance.cameraLines.Play();
+                dashRequest = true;
+            }
 
-        if (dashCdTimer >0)
-        {
-            dashCdTimer -= Time.deltaTime;
+            if (dashCdTimer >0)
+            {
+                dashCdTimer -= Time.deltaTime;
+            }
         }
+        else
+        {
+            canDash = false;
+        }
+        
+        
     }
 
     private void FixedUpdate()

@@ -1,9 +1,12 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private bool ShouldCrouch => Input.GetKeyDown(crouchKey) && isGrounded;
+    
     float playerHeight = 2f;
 
     [SerializeField] Transform orientation;
@@ -29,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Keybinds")]
     [SerializeField] KeyCode jumpKey = KeyCode.Space;
     [SerializeField] KeyCode sprintKey = KeyCode.LeftShift;
+    [SerializeField] KeyCode crouchKey = KeyCode.LeftControl;
 
     [Header("Drag")]
     public float groundDrag = 6f;
@@ -43,6 +47,15 @@ public class PlayerMovement : MonoBehaviour
     float groundDistance = 0.4f;
     public bool isGrounded;
 
+    [Header("Crouch Parameters")]
+    [SerializeField] private float timeToCrouch;
+    [SerializeField] private float crouchingHeight;
+    [SerializeField] private float standingHeight;
+    [SerializeField] private Vector3 standingCenterPoint;
+    [SerializeField] private Vector3 crouchingCenterPoint;
+    private CapsuleCollider _capsuleCollider;
+    private bool isCrouching;
+    
     Vector3 moveDirection;
     Vector3 slopeMoveDirection;
 
@@ -55,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         wr = GetComponent<WallRun>();
+        _capsuleCollider = GetComponentInChildren<CapsuleCollider>();
     }
 
     private void Update()
@@ -66,6 +80,11 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(jumpKey) && isGrounded)
         {
             jumpRequest = true;
+        }
+
+        if (ShouldCrouch)
+        {
+            HandleCrouch();
         }
 
         slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
@@ -194,5 +213,33 @@ public class PlayerMovement : MonoBehaviour
     void ChangeYVelocity(float multiplier)
     {
         rb.velocity += ((multiplier - 1) * Physics.gravity.y * Vector3.up * Time.deltaTime);
+    }
+
+    void HandleCrouch()
+    {
+        StartCoroutine(Crouch());
+    }
+
+    private IEnumerator Crouch()
+    {
+        float timeElapsed = 0f;
+        float targetHeight = isCrouching ? standingHeight : crouchingHeight;
+        float currentHeight = _capsuleCollider.height;
+        Vector3 targetCenter = isCrouching ? standingCenterPoint : crouchingCenterPoint;
+        Vector3 currentCenter = _capsuleCollider.center;
+
+        while (timeElapsed < timeToCrouch)
+        {
+            _capsuleCollider.height = Mathf.Lerp(currentHeight, targetHeight, timeElapsed / timeToCrouch);
+            _capsuleCollider.center = Vector3.Lerp(currentCenter, targetCenter, timeElapsed / timeToCrouch);
+            timeElapsed += Time.deltaTime;
+
+            yield return null;
+        }
+
+        _capsuleCollider.height = targetHeight;
+        _capsuleCollider.center = targetCenter;
+
+        isCrouching = !isCrouching;
     }
 }
