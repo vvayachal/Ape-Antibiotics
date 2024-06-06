@@ -4,12 +4,12 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private bool ShouldCrouch => Input.GetKeyDown(crouchKey) && isGrounded;
+    private bool ShouldCrouch => Input.GetKeyDown(crouchKey) && isGrounded && !wr.wallRunning;
 
     float playerHeight = 2f;
 
     [SerializeField] Transform orientation;
-
+    
     [Header("Movement")]
     float speed;
     [SerializeField] Text speedText;
