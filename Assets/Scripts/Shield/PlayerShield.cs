@@ -17,8 +17,19 @@ public class PlayerShield : MonoBehaviour, IDamageable
     // Variables
     private float currentShieldHealth;
     private bool isCracked = false;
-    public bool IsCracked {  get { return isCracked; } }
+
+    public bool IsCracked
+    {
+        get { return isCracked; }
+    }
+
     private float timeSinceDamage;
+
+    private bool isDead = false;
+    public bool IsDead
+    {
+        get { return isDead; }
+    }
 
     // Events
     public static event Action<float, float> ShieldChangedEvent;
@@ -66,6 +77,16 @@ public class PlayerShield : MonoBehaviour, IDamageable
      */
     public void TakeDamage(float damage)
     {
+        // Set timer to 0
+        timeSinceDamage = 0f;
+        
+        if (isCracked)
+        {
+            isDead = true;
+            Debug.Log("Player is Dead!");
+            return;
+        }
+        
         // Take damage
         currentShieldHealth -= damage;
 
@@ -88,9 +109,6 @@ public class PlayerShield : MonoBehaviour, IDamageable
 
         // Invoke the event
         ShieldChangedEvent?.Invoke(currentShieldHealth, maxShieldHealth);
-
-        // Set timer to 0
-        timeSinceDamage = 0f;
 
         // Debugging
         if (isCracked)

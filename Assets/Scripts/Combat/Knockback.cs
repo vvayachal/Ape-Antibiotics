@@ -5,11 +5,11 @@ using UnityEngine.AI;
 
 public class Knockback : MonoBehaviour
 {
-    [SerializeField] public bool knockback = true;
-    [SerializeField] float knockbackMultiplier = 1f;
-    [SerializeField] float upwardsForce = 10f;
+    [SerializeField] private bool knockback = true;
+    [SerializeField] private float knockbackMultiplier = 1f;
+    [SerializeField] private float upwardsForce = 10f;
 
-    float timeToReposition;
+    private float timeToReposition;
 
     private void Start()
     {

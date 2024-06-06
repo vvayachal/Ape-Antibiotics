@@ -1,11 +1,19 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IKnockable
 {
     private bool ShouldCrouch => Input.GetKeyDown(crouchKey) && isGrounded && !wr.wallRunning;
+    private bool _isKnocked = false;
+    
+    [Tooltip("Controls whether the player is to be knocked back. (Mainly for debugging purposes).")]
+    [SerializeField] private bool _isKnockbackable;
 
+    [Tooltip("Controls the knockback force."), Range(0.2f, 6f)]
+    [SerializeField] private float _knockbackForceMultplier;
+    
     float playerHeight = 2f;
 
     [SerializeField] Transform orientation;
@@ -246,5 +254,58 @@ public class PlayerMovement : MonoBehaviour
         _capsuleCollider.height = targetHeight;
 
         isCrouching = !isCrouching;
+    }
+
+    public void KnockBack(Vector3 knockbackOrigin, float baseKnockbackForce)
+    {
+        if (_isKnockbackable && !_isKnocked)
+        {
+            Debug.Log("Knockback Applied");
+
+            // Calculate the direction of the knockback
+            Vector3 knockbackDirection = transform.position - knockbackOrigin;
+
+            // Normalize the direction to eliminate the magnitude
+            knockbackDirection.Normalize();
+
+            // Set the state
+            _isKnocked = true;
+
+            // Disable neccessary components
+
+            if (TryGetComponent<Animator>(out Animator animator))
+            {
+                animator.enabled = false;    
+            }
+
+            if (TryGetComponent<NavMeshAgent>(out NavMeshAgent navMeshAgent))
+            {
+                navMeshAgent.enabled = false;
+            }
+
+            // Add "Knockback"
+            // I use ForceMode.VelocityChange becuase the designer will modify each enemies knockback force multiplier directly in this script's inspector.
+            rb.AddForce(knockbackDirection * baseKnockbackForce * _knockbackForceMultplier, ForceMode.VelocityChange);
+            
+            Recover();
+        }
+    }
+    
+    public void Recover()
+    {
+        if (_isKnocked)
+        {
+            // Reset the state
+            _isKnocked = false;
+
+            // Enable neccesary components
+            if (TryGetComponent<Animator>(out Animator animator))
+            {
+                animator.enabled = true;    
+            }
+            
+            if (TryGetComponent<NavMeshAgent>(out NavMeshAgent navMeshAgent))
+                navMeshAgent.enabled = true;
+        }
     }
 }

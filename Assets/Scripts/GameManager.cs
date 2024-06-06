@@ -6,6 +6,8 @@ using UnityEngine.Assertions;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private GameObject gameOverScreen;
+    
     [SerializeField] private GameObject player;
     
     [Tooltip("Reference to the Particle Effect for Speed Lines.")]
@@ -30,11 +32,18 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         cameraLines.Stop();
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (player.GetComponent<PlayerShield>().IsDead)
+        {
+            gameOverScreen.SetActive(true);
+            Time.timeScale = 0;
+        }
+        
         // Save Game on pressing Y
         if (Input.GetKeyDown(KeyCode.Y)) 
         {

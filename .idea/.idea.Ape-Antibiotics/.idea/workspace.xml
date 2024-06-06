@@ -6,7 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="07995328-e2ec-417d-b2f3-6653ca854e95" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Ape-Antibiotics/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Ape-Antibiotics/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animation/Animations/Enemy Animations/Enemy Attack.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Animations/Enemy Animations/Enemy Attack.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animation/Controllers/Enemy.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Controllers/Enemy.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Enemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemy.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Combat/Knockback.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Combat/Knockback.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Combat/Punch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Combat/Punch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyHealth.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyHealth.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyMotor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyMotor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Shield/PlayerShield.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Shield/PlayerShield.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +48,8 @@
     "Attach to Unity Editor.Attach to Unity Editor.executor": "Debug",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Crouch--hellfire",
+    "XThreadsFramesViewSplitterKey": "0.4930716",
+    "git-widget-placeholder": "shield-and-shield-break--hellfire",
     "ignore.virus.scanning.warn.message": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -83,10 +94,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="5196">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="5196" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -110,6 +121,7 @@
       <workItem from="1717620567462" duration="4584000" />
       <workItem from="1717628834930" duration="4284000" />
       <workItem from="1717646024872" duration="865000" />
+      <workItem from="1717695434057" duration="20192000" />
     </task>
     <servers />
   </component>

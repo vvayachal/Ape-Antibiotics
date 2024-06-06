@@ -63,10 +63,20 @@ public class EnemyHealth : MonoBehaviour
         {
             ScoreManager.Instance.DropCoins(coinsToDrop, gameObject.transform.position);
             
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
-        GetComponent<NavMeshAgent>().enabled = false;
-        animator.SetTrigger("die");
-        Destroy(gameObject, timeBeforeDestroy);
+
+        NavMeshAgent navMeshAgent;
+        if (TryGetComponent<NavMeshAgent>(out navMeshAgent))
+        {
+            navMeshAgent.enabled = false;    
+        }
+
+        if (animator)
+        {
+            animator.SetTrigger("die");    
+        }
+        
+        //Destroy(gameObject, timeBeforeDestroy);
     }
 }
