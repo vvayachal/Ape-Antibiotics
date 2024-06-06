@@ -6088,7 +6088,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8330503063304616260}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -164.98703, y: 27.242764, z: 135.5}
+  m_LocalPosition: {x: -164.98703, y: 17.09, z: 135.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 580108172927889473}
@@ -6154,8 +6154,8 @@ MonoBehaviour:
   timeToCrouch: 0.5
   crouchingHeight: 0.045
   standingHeight: 0.09896102
-  standingCenterPoint: {x: 0, y: 0, z: 0}
-  crouchingCenterPoint: {x: 0, y: 0.5, z: 0}
+  crouchingMoveSpeed: 11
+  isCrouching: 0
 --- !u!54 &8330503063304616267
 Rigidbody:
   m_ObjectHideFlags: 0

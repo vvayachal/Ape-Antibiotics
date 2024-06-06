@@ -1,12 +1,11 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
     private bool ShouldCrouch => Input.GetKeyDown(crouchKey) && isGrounded;
-    
+
     float playerHeight = 2f;
 
     [SerializeField] Transform orientation;
@@ -16,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Text speedText;
     private float currentSpeed;
     WallRun wr;
-   
+
     [Header("Sprinting")]
     [SerializeField] float walkSpeed = 4f;
     [SerializeField] float sprintSpeed = 6f;
@@ -51,11 +50,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float timeToCrouch;
     [SerializeField] private float crouchingHeight;
     [SerializeField] private float standingHeight;
-    [SerializeField] private Vector3 standingCenterPoint;
-    [SerializeField] private Vector3 crouchingCenterPoint;
+    [SerializeField] private float crouchingMoveSpeed;
     private CapsuleCollider _capsuleCollider;
-    private bool isCrouching;
-    
+    [SerializeField] private bool isCrouching;
+
     Vector3 moveDirection;
     Vector3 slopeMoveDirection;
 
@@ -150,14 +148,21 @@ public class PlayerMovement : MonoBehaviour
 
     void ControlSpeed()
     {
-        if (Input.GetKey(sprintKey) && isGrounded)
+        if (!isCrouching && Input.GetKey(sprintKey) && isGrounded)
         {
             speed = Mathf.Lerp(speed, sprintSpeed, acceleration * Time.deltaTime);
             GameManager.Instance.cameraLines.Play();
         }
         else
         {
-            speed = Mathf.Lerp(speed, walkSpeed, acceleration * Time.deltaTime);
+            if(!isCrouching)
+            {
+                speed = Mathf.Lerp(speed, walkSpeed, acceleration * Time.deltaTime);
+            }
+            else
+            {
+                speed = Mathf.Lerp(speed, crouchingMoveSpeed, acceleration * Time.deltaTime);
+            }
             GameManager.Instance.cameraLines.Stop();
         }
     }
@@ -205,9 +210,13 @@ public class PlayerMovement : MonoBehaviour
     {
         currentSpeed = ((float)rb.velocity.magnitude);
         // Round to nearest tenth decimal
-        var newValue = System.Math.Round(currentSpeed,1);
+        var newValue = System.Math.Round(currentSpeed, 1);
 
-        speedText.text = newValue.ToString();
+        if(speedText)
+        {
+            speedText.text = newValue.ToString();
+        }
+        
     }
 
     void ChangeYVelocity(float multiplier)
@@ -225,20 +234,16 @@ public class PlayerMovement : MonoBehaviour
         float timeElapsed = 0f;
         float targetHeight = isCrouching ? standingHeight : crouchingHeight;
         float currentHeight = _capsuleCollider.height;
-        Vector3 targetCenter = isCrouching ? standingCenterPoint : crouchingCenterPoint;
-        Vector3 currentCenter = _capsuleCollider.center;
 
         while (timeElapsed < timeToCrouch)
         {
             _capsuleCollider.height = Mathf.Lerp(currentHeight, targetHeight, timeElapsed / timeToCrouch);
-            _capsuleCollider.center = Vector3.Lerp(currentCenter, targetCenter, timeElapsed / timeToCrouch);
             timeElapsed += Time.deltaTime;
 
             yield return null;
         }
 
         _capsuleCollider.height = targetHeight;
-        _capsuleCollider.center = targetCenter;
 
         isCrouching = !isCrouching;
     }
