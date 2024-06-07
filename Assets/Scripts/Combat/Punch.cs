@@ -33,7 +33,13 @@ public class Punch : MonoBehaviour
     [Tooltip("The amount of knockback applied to the enemy.")]
     [SerializeField] float attackKnockbackForceMultiplier;
 
+    [Tooltip("Enables Punch Dash")]
+    [SerializeField] private bool isPunchDashEnable;
+
+    [Tooltip("The amount of force applied to the player when punching.")]
     [SerializeField] private float punchDashForce;
+
+
 
     //----------
 
@@ -126,8 +132,10 @@ public class Punch : MonoBehaviour
         isChargingUp = false;
 
         //AD HOC Start
-        this.gameObject.GetComponent<Rigidbody>().AddForce(camera1.transform.forward * punchDashForce);
-
+        if (isPunchDashEnable)
+        {
+            this.gameObject.GetComponent<Rigidbody>().AddForce(camera1.transform.forward * punchDashForce);
+        }
         //AD HOC Finish
 
         // Play attack animation
