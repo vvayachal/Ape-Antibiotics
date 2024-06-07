@@ -29,10 +29,14 @@ public class Grappling : MonoBehaviour
     [SerializeField] float jointMassScaleValue = 4.5f;
 
 
-    //[Header("Cooldown")]
-    //[Tooltip("The cooldown of the attack.")]
-    //[SerializeField] float grapplingCd = 1f;
-    //private WaitForSeconds grapplingCdTimer;
+    // [Header("Cooldown")]
+    // [Tooltip("The cooldown of the attack.")]
+    // [SerializeField] float grapplingCd = 1f;
+    // // private WaitForSeconds grapplingCdTimer;
+
+    public float grapplingCdTimer;
+
+    public float grapplingCdTimeLeft;
 
     [Header("Input")]
     public KeyCode grappleKey = KeyCode.R;
@@ -49,7 +53,7 @@ public class Grappling : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         grappleGun.SetActive(false);
 
-        //grapplingCdTimer = new WaitForSeconds(grapplingCd);
+        // grapplingCdTimer = new WaitForSeconds(grapplingCd);
     }
 
     void Update()
@@ -58,7 +62,7 @@ public class Grappling : MonoBehaviour
         {
             StartGrapple();
         }
-        if (Input.GetKeyUp(grappleKey))
+        if (Input.GetKeyUp(grappleKey) && canGrapple && lr.enabled)
         {
             StopGrapple();
         }
@@ -92,21 +96,24 @@ public class Grappling : MonoBehaviour
 
         lr.enabled = true;
         grappleGun.SetActive(true);
-
-        //StartCoroutine(GrappleCooldown());
+        
     }
 
-    //private IEnumerator GrappleCooldown()
-    //{
-    //    // Perform the cooldown
-    //    yield return grapplingCdTimer;
+    private IEnumerator GrappleCooldown()
+    {
 
-    //    canGrapple = true;
-    //}
+        while (grapplingCdTimeLeft > 0) // Perform the cooldown
+        {
+            grapplingCdTimeLeft -= Time.deltaTime;
+            yield return null;
+        }
+        canGrapple = true;
+    }
 
     // change to fixed update
     private void ExecuteGrapplePhysics(RaycastHit hit)
     {
+
         Vector3 grapplePoint = hit.point;
 
         joint = pm.gameObject.AddComponent<SpringJoint>();
@@ -135,9 +142,16 @@ public class Grappling : MonoBehaviour
         grappleGun.SetActive(false);
         lr.enabled = false;
         Destroy(joint);
+
+        canGrapple = false;
+
+        grapplingCdTimeLeft = grapplingCdTimer;
+
+        StartCoroutine(GrappleCooldown());
     }
 
-    private void setGrappleRope(RaycastHit hit){
+    private void setGrappleRope(RaycastHit hit)
+    {
         Vector3[] positions = new Vector3[2];
         positions[0] = shootPoint.position;
         positions[1] = hit.point;
