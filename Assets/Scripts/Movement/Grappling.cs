@@ -62,7 +62,7 @@ public class Grappling : MonoBehaviour
         {
             StartGrapple();
         }
-        if (Input.GetKeyUp(grappleKey) && canGrapple)
+        if (Input.GetKeyUp(grappleKey) && canGrapple && lr.enabled)
         {
             StopGrapple();
         }
