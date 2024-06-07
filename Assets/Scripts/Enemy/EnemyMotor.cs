@@ -1,18 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 
-public class EnemyMotor : MonoBehaviour, IKnockable
+public class EnemyMotor : MonoBehaviour
 {
-    Transform target; // Changed target to search for the player in awake [Tegomlee]
-    NavMeshAgent navMeshAgent;
-    Animator animator;
-    Rigidbody rb;
-
-    //-----------------------
-
     [Header("NavMesh Attributes")]
 
     [SerializeField] float chaseRange = 5f; // <- This isn't used in the code except for the OnDrawGizmos(), Would remove [Tegomlee]
@@ -25,16 +15,23 @@ public class EnemyMotor : MonoBehaviour, IKnockable
     [Tooltip("Controls wether the enemy is able to be knocked back. (Mainly for debugging purposes).")]
     [SerializeField] bool _isKnockbackable;
 
-    [Tooltip("Controls how much knockback force is applied to this specific enemy (Lower is lighter)."), Range(0.2f, 6f)]
-    [SerializeField] float _knockbackForceMultplier = 1f;
-
     [Tooltip("Layer(s) the enemy considers as walkable.")]
     [SerializeField] LayerMask _walkableLayer;
 
+    [Tooltip("How long (in seconds) must pass before the enemy can recover.")]
+    [SerializeField] float _knockbackRecoverTime = 3f;
+
     //----------
 
-    // Manages state of knockback
+    // Variables
     private bool _isKnocked = false;
+    private float _knockBackTime = 0f;
+
+    // References
+    Transform target; // Changed target to search for the player in awake [Tegomlee]
+    NavMeshAgent navMeshAgent;
+    Animator animator;
+    CapsuleCollider capsuleCollider;
 
     private void Awake()
     {
@@ -44,21 +41,26 @@ public class EnemyMotor : MonoBehaviour, IKnockable
         // Assign component references
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
-        rb = GetComponent<Rigidbody>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
     }
 
     private void Update()
     {
         if (!_isKnocked)
             EngageTarget();
-        distanceToTarget = Vector3.Distance(transform.position, target.position);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (LayerMaskExtensions.IsLayerInMask(_walkableLayer, collision.gameObject.layer))
+        
+        // Check if enemy can recover
+        else
         {
-            Recover();
+            // Increment the time the enemy is knocked out
+            _knockBackTime += Time.deltaTime;
+
+            // Perform recover check
+            if (_knockBackTime >= _knockbackRecoverTime && IsGrounded())
+            {
+                _isKnocked = false;
+                Knockback.Instance.SetComponentState(capsuleCollider, true);
+            }
         }
     }
 
@@ -98,42 +100,18 @@ public class EnemyMotor : MonoBehaviour, IKnockable
         Debug.Log($"{this.name} has attacked {target.name}");
     }
 
-    public void KnockBack(Vector3 knockbackOrigin, float baseKnockbackForce)
+    // This is the new way the enemy will recover, this is so it can be affected without instantly resetting [Tegomlee]
+    private bool IsGrounded()
     {
-        if (_isKnockbackable && !_isKnocked)
-        {
-            Debug.Log("Knockback Applied");
-
-            // Calculate the direction of the knockback
-            Vector3 knockbackDirection = transform.position - knockbackOrigin;
-
-            // Normalize the direction to eliminate the magnitude
-            knockbackDirection.Normalize();
-
-            // Set the state
-            _isKnocked = true;
-
-            // Disable neccessary components
-            animator.enabled = false;
-            navMeshAgent.enabled = false;
-
-            // Add "Knockback"
-            // I use ForceMode.VelocityChange becuase the designer will modify each enemies knockback force multiplier directly in this script's inspector.
-            rb.AddForce(knockbackDirection * baseKnockbackForce * _knockbackForceMultplier, ForceMode.VelocityChange);
-        }
+        Collider[] groundArray = Physics.OverlapSphere(transform.position, 5f, _walkableLayer, QueryTriggerInteraction.Ignore);
+        Debug.Log(groundArray.Length);
+        return groundArray.Length > 0;
     }
 
-    public void Recover()
+    public void PrepareEnemyForKnockback()
     {
-        if (_isKnocked)
-        {
-            // Reset the state
-            _isKnocked = false;
-
-            // Enable neccesary components
-            animator.enabled = true;
-            navMeshAgent.enabled = true;
-        }
+        _knockBackTime = 0f;
+        _isKnocked = true;
     }
 
     // Controls the wire mesh that determines how close player

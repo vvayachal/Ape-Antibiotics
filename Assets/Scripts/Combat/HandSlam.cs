@@ -58,7 +58,7 @@ public class HandSlam : MonoBehaviour
                 }
 
                 // Knock them back
-                StartCoroutine(knockb.ApplyKnockBack(enemy, attackPoint.position, damage));
+                //StartCoroutine(knockb.ApplyKnockBack(enemy, attackPoint.position, damage));
             }
         }
     }

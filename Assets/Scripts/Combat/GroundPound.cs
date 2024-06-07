@@ -114,7 +114,7 @@ public class GroundPound : MonoBehaviour
             }
 
             // Knock them back
-            StartCoroutine(knockb.ApplyKnockBack(enemy, aoeHitbox.position, aoeDamage));
+            //StartCoroutine(knockb.ApplyKnockBack(enemy, aoeHitbox.position, aoeDamage));
         }
 
         cooldown = maxCooldown;
