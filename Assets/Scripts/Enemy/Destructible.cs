@@ -24,15 +24,21 @@ public class Destructible : MonoBehaviour, IKnockable
     // Manages state of knockback
     private bool _isKnocked = false;
 
+    GameManager gameManager;
+
     private void Awake()
     {
         // Assign component references
         rb = GetComponent<Rigidbody>();
+        gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
     }
     public void KnockBack(Vector3 knockbackOrigin, float baseKnockbackForce)
     {
         if (_isKnockbackable && !_isKnocked)
         {
+            // Inform game manager that item is destroyed
+
+            gameManager.ItemDestroyed();
             Debug.Log("Knockback Applied");
 
             // Calculate the direction of the knockback

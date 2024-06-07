@@ -414,7 +414,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chaseRange: 200
   _isKnockbackable: 1
-  _knockbackForceMultplier: 1.92
+  _knockbackForceMultplier: 0.2
   _walkableLayer:
     serializedVersion: 2
     m_Bits: 64

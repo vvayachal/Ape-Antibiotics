@@ -14,6 +14,8 @@ public class EnemyHealth : MonoBehaviour
 
     bool isDead = false;
 
+    GameManager gameManager;
+
     public bool IsDead()
     {
         return isDead;
@@ -22,6 +24,7 @@ public class EnemyHealth : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
     }
 
     void Update()
@@ -42,6 +45,8 @@ public class EnemyHealth : MonoBehaviour
 
     void Die()
     {
+        gameManager.EnemyDefeated();
+
         if (isDead) return;
 
         isDead = true;
