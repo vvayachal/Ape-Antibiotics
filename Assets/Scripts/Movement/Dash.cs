@@ -9,6 +9,8 @@ public class Dash : MonoBehaviour
     public Transform playerCam;
     private Rigidbody rb;
     private PlayerMovement pm;
+    public CooldownManager cooldownManager; // Reference to the CooldownManager
+    public int cooldownIconIndex; // Index of the cooldown icon in CooldownManager
 
     [Header("Dashing")]
     public float dashForce;
@@ -36,7 +38,7 @@ public class Dash : MonoBehaviour
             dashRequest = true;
         }
 
-        if (dashCdTimer > 0)
+        if (dashCdTimer >0)
         {
             dashCdTimer -= Time.deltaTime;
         }
@@ -61,6 +63,10 @@ public class Dash : MonoBehaviour
         else
         {
             dashCdTimer = dashCd;
+            if (cooldownManager != null)
+            {
+                cooldownManager.TriggerCooldown(cooldownIconIndex); // Start the cooldown animation
+            }
         }
 
         Vector3 forceToApply = orientation.forward * dashForce + orientation.up * dashUpwardForce;
