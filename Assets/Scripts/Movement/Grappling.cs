@@ -29,14 +29,20 @@ public class Grappling : MonoBehaviour
     [SerializeField] float jointMassScaleValue = 4.5f;
 
 
-    // [Header("Cooldown")]
-    // [Tooltip("The cooldown of the attack.")]
-    // [SerializeField] float grapplingCd = 1f;
-    // // private WaitForSeconds grapplingCdTimer;
+    [Header("Cooldown")]
+    [Tooltip("The cooldown time of this ability.")]
+    public float GrapplingCd;
+    
+    [SerializeField] [Tooltip("DEBUG - TIME LEFT")]
+    private float grapplingCdTimeLeft;
 
-    public float grapplingCdTimer;
+    [Tooltip("Reference to the CooldownManager.")]
+    public CooldownManager cooldownManager; // Reference to the CooldownManager
+    
+    [Tooltip("Index of the cooldown icon in CooldownManager.")]
+    public int cooldownIconIndex = 0; // Index of the cooldown icon in CooldownManager
 
-    public float grapplingCdTimeLeft;
+
 
     [Header("Input")]
     public KeyCode grappleKey = KeyCode.R;
@@ -101,7 +107,7 @@ public class Grappling : MonoBehaviour
 
     private IEnumerator GrappleCooldown()
     {
-
+        cooldownManager.TriggerCooldown(cooldownIconIndex,GrapplingCd);
         while (grapplingCdTimeLeft > 0) // Perform the cooldown
         {
             grapplingCdTimeLeft -= Time.deltaTime;
@@ -145,7 +151,7 @@ public class Grappling : MonoBehaviour
 
         canGrapple = false;
 
-        grapplingCdTimeLeft = grapplingCdTimer;
+        grapplingCdTimeLeft = GrapplingCd;
 
         StartCoroutine(GrappleCooldown());
     }

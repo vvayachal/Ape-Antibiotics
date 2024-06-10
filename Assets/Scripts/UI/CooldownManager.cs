@@ -9,7 +9,9 @@ public class CooldownManager : MonoBehaviour
     {
         public Image icon; // The main icon image
         public Image backgroundIcon; // The darker background icon
-        public float cooldownDuration = 5f; // Duration of the cooldown
+
+        [HideInInspector]
+        public float cooldownDuration; // Duration of the cooldown
     }
 
     public CooldownIcon[] cooldownIcons;
@@ -17,10 +19,10 @@ public class CooldownManager : MonoBehaviour
     public void StartCooldown(CooldownIcon cooldownIcon)
     {
         // Reset the fill amount
-        cooldownIcon.icon.fillAmount = 1;
+        cooldownIcon.icon.fillAmount = 0;
 
         // Animate the fill amount from 1 to 0 over the duration
-        cooldownIcon.icon.DOFillAmount(0, cooldownIcon.cooldownDuration).SetEase(Ease.Linear).OnComplete(() =>
+        cooldownIcon.icon.DOFillAmount(1, cooldownIcon.cooldownDuration).SetEase(Ease.Linear).OnComplete(() =>
         {
             // Reset fill amount to 1 after cooldown is complete
             cooldownIcon.icon.fillAmount = 1;
@@ -29,10 +31,11 @@ public class CooldownManager : MonoBehaviour
     }
 
     // Example method to manually start a cooldown for a specific icon
-    public void TriggerCooldown(int index)
+    public void TriggerCooldown(int index, float time)
     {
         if (index >= 0 && index < cooldownIcons.Length)
         {
+            cooldownIcons[index].cooldownDuration = time;
             StartCooldown(cooldownIcons[index]);
         }
     }
