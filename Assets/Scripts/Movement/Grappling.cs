@@ -64,11 +64,11 @@ public class Grappling : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(grappleKey) && canGrapple)
+        if (Input.GetMouseButtonDown(1) && canGrapple)
         {
             StartGrapple();
         }
-        if (Input.GetKeyUp(grappleKey) && canGrapple && lr.enabled)
+        if (Input.GetMouseButtonUp(1) && canGrapple && lr.enabled)
         {
             StopGrapple();
         }

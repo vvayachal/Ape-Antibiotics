@@ -46,7 +46,7 @@ public class Punch : MonoBehaviour
     // References
     private Animator anim;
 
-    [SerializeField]private Camera camera1;
+    [SerializeField] private Camera camera1;
 
     // Variables
     private bool canPunch = true;
@@ -154,17 +154,18 @@ public class Punch : MonoBehaviour
             if (enemy.gameObject.TryGetComponent<EnemyHealth>(out var enemyHealth))
             {
                 enemyHealth.TakeDamage(damageBasedOnCharge);
+                // Calculate the final knock force
+                float finalKnockbackValue = attackKnockbackForceMultiplier * damageBasedOnCharge;
+
+                // Prepare the enemy for knockback
+                // This isn't a great solution, will refactor if necessary [Tegomlee].
+                enemy.gameObject.GetComponent<EnemyMotor>().PrepareEnemyForKnockback();
+
+                // Apply the knockback
+                Knockback.Instance.PerformKnockback(enemy, attackPoint.position, finalKnockbackValue);
             }
 
-            // Calculate the final knock force
-            float finalKnockbackValue = attackKnockbackForceMultiplier * damageBasedOnCharge;
 
-            // Prepare the enemy for knockback
-            // This isn't a great solution, will refactor if necessary [Tegomlee].
-            enemy.gameObject.GetComponent<EnemyMotor>().PrepareEnemyForKnockback();
-
-            // Apply the knockback
-            Knockback.Instance.PerformKnockback(enemy, attackPoint.position, finalKnockbackValue);
         }
 
         StartCoroutine(PunchCoolDown());
