@@ -7,6 +7,9 @@ TagManager:
   - Camera Position
   - Level
   - Hazard
+  - Hazard1
+  - Hazard2
+  - Hazard3
   layers:
   - Default
   - TransparentFX
