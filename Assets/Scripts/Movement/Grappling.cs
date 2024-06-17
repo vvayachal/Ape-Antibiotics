@@ -51,6 +51,8 @@ public class Grappling : MonoBehaviour
     private bool canGrapple = true;
 
     private RaycastHit savedHit;
+    private Vector4 hitPointOffset;
+    private GameObject grappleHitPoint;
 
     void Start()
     {
@@ -58,17 +60,17 @@ public class Grappling : MonoBehaviour
         dj = GetComponent<DoubleJump>();
         rb = GetComponent<Rigidbody>();
         grappleGun.SetActive(false);
-
+        grappleHitPoint = new GameObject();
         // grapplingCdTimer = new WaitForSeconds(grapplingCd);
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1) && canGrapple)
+        if (Input.GetKeyDown(grappleKey) && canGrapple)
         {
             StartGrapple();
         }
-        if (Input.GetMouseButtonUp(1) && canGrapple && lr.enabled)
+        if (Input.GetKeyUp(grappleKey) && canGrapple && lr.enabled)
         {
             StopGrapple();
         }
@@ -78,7 +80,7 @@ public class Grappling : MonoBehaviour
     {
         if (grappling)
         {
-            setGrappleRope(savedHit);
+            setGrappleRope();
         }
     }
 
@@ -92,8 +94,13 @@ public class Grappling : MonoBehaviour
         if (Physics.Raycast(shootPoint.position, shootPoint.forward, out hit, maxGrappleDistance, whatIsGrappable))
         {
             Debug.Log($"We hit {hit.transform.name}");
-            savedHit = hit;
-            ExecuteGrapplePhysics(savedHit);
+
+            grappleHitPoint.transform.parent = hit.transform;
+            grappleHitPoint.transform.position = hit.point;
+
+            gameObject.transform.parent = hit.transform;
+            
+            ExecuteGrapplePhysics();
         }
         else
         {
@@ -117,10 +124,10 @@ public class Grappling : MonoBehaviour
     }
 
     // change to fixed update
-    private void ExecuteGrapplePhysics(RaycastHit hit)
+    private void ExecuteGrapplePhysics()
     {
 
-        Vector3 grapplePoint = hit.point;
+        Vector3 grapplePoint = grappleHitPoint.transform.position;
 
         joint = pm.gameObject.AddComponent<SpringJoint>();
         joint.autoConfigureConnectedAnchor = false;
@@ -152,15 +159,17 @@ public class Grappling : MonoBehaviour
         canGrapple = false;
 
         grapplingCdTimeLeft = GrapplingCd;
-
+        grappleHitPoint.transform.parent = null;
+        gameObject.transform.parent = null;
         StartCoroutine(GrappleCooldown());
     }
 
-    private void setGrappleRope(RaycastHit hit)
+    private void setGrappleRope()
     {
         Vector3[] positions = new Vector3[2];
         positions[0] = shootPoint.position;
-        positions[1] = hit.point;
+        positions[1] = grappleHitPoint.transform.position;
+
         lr.SetPositions(positions);
     }
 }

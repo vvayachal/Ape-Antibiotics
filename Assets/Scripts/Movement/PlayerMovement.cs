@@ -198,7 +198,7 @@ public class PlayerMovement : MonoBehaviour
         // Round to nearest tenth decimal
         var newValue = System.Math.Round(currentSpeed,1);
 
-        speedText.text = newValue.ToString();
+        //speedText.text = newValue.ToString();
     }
 
     void ChangeYVelocity(float multiplier)
