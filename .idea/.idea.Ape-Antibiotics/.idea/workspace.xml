@@ -4,11 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3507f482-49e7-4163-a260-35d922454cbf" name="Changes" comment="" />
+    <list default="true" id="3507f482-49e7-4163-a260-35d922454cbf" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Ape-Antibiotics/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Ape-Antibiotics/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main_Scenes/Sm0 Testing/Grapple Parametrization 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main_Scenes/Sm0 Testing/Grapple Parametrization 1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/Grappling.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/Grappling.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerMovement.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -28,6 +36,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.39219016&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;grapple-bug-fix--hellfire&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -37,9 +46,9 @@
   },
   &quot;keyToStringList&quot;: {
     &quot;rider.external.source.directories&quot;: [
-      &quot;/Users/venkatesh/Library/Application Support/JetBrains/Rider2023.3/resharper-host/DecompilerCache&quot;,
-      &quot;/Users/venkatesh/Library/Application Support/JetBrains/Rider2023.3/resharper-host/SourcesCache&quot;,
-      &quot;/Users/venkatesh/.local/share/Symbols/src&quot;
+      &quot;/Users/venkatesh/Library/Application Support/JetBrains/Rider2024.1/resharper-host/DecompilerCache&quot;,
+      &quot;/Users/venkatesh/Library/Application Support/JetBrains/Rider2024.1/resharper-host/SourcesCache&quot;,
+      &quot;/Users/venkatesh/Library/Application Support/Symbols/src&quot;
     ]
   }
 }</component>
@@ -91,6 +100,9 @@
       <updated>1718640042561</updated>
       <workItem from="1718640044742" duration="12000" />
       <workItem from="1718640213273" duration="8809000" />
+      <workItem from="1718755764811" duration="627000" />
+      <workItem from="1718903160596" duration="5761000" />
+      <workItem from="1718909940833" duration="1984000" />
     </task>
     <servers />
   </component>
@@ -98,6 +110,11 @@
     <option name="version" value="3" />
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
+  <component name="UnityProjectDiscoverer">
+    <option name="hasUnityReference" value="true" />
+    <option name="unityProject" value="true" />
+    <option name="unityProjectFolder" value="true" />
+  </component>
   <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />

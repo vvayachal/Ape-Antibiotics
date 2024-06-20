@@ -7,7 +7,8 @@ public class Grappling : MonoBehaviour
     [Header("References")]
     private PlayerMovement pm;
     private DoubleJump dj;
-    private Rigidbody rb;
+    private Rigidbody _rigidbody;
+    private FixedJoint _fixedJoint;
     public Transform cam;
     public Transform shootPoint;
     public LayerMask whatIsGrappable;
@@ -53,12 +54,12 @@ public class Grappling : MonoBehaviour
     private RaycastHit savedHit;
     private Vector4 hitPointOffset;
     private GameObject grappleHitPoint;
-
+    
     void Start()
     {
         pm = GetComponent<PlayerMovement>();
         dj = GetComponent<DoubleJump>();
-        rb = GetComponent<Rigidbody>();
+        _rigidbody = GetComponent<Rigidbody>();
         grappleGun.SetActive(false);
         grappleHitPoint = new GameObject();
         // grapplingCdTimer = new WaitForSeconds(grapplingCd);
@@ -98,9 +99,7 @@ public class Grappling : MonoBehaviour
             grappleHitPoint.transform.parent = hit.transform;
             grappleHitPoint.transform.position = hit.point;
 
-            gameObject.transform.parent = hit.transform;
-            
-            ExecuteGrapplePhysics();
+            ExecuteGrapplePhysics(hit.rigidbody);
         }
         else
         {
@@ -117,6 +116,8 @@ public class Grappling : MonoBehaviour
         cooldownManager.TriggerCooldown(cooldownIconIndex,GrapplingCd);
         while (grapplingCdTimeLeft > 0) // Perform the cooldown
         {
+            grappleHitPoint.transform.parent = null;
+            
             grapplingCdTimeLeft -= Time.deltaTime;
             yield return null;
         }
@@ -124,17 +125,19 @@ public class Grappling : MonoBehaviour
     }
 
     // change to fixed update
-    private void ExecuteGrapplePhysics()
+    private void ExecuteGrapplePhysics(Rigidbody connectedBody)
     {
-
-        Vector3 grapplePoint = grappleHitPoint.transform.position;
-
         joint = pm.gameObject.AddComponent<SpringJoint>();
         joint.autoConfigureConnectedAnchor = false;
-        joint.connectedAnchor = grapplePoint;
-        //joint.connectedBody = rb;
+        joint.connectedAnchor = grappleHitPoint.transform.position;
+        
+        _fixedJoint = pm.gameObject.AddComponent<FixedJoint>();
+        _fixedJoint.autoConfigureConnectedAnchor = true;
+        _fixedJoint.connectedAnchor = grappleHitPoint.transform.position;
+        
+        _fixedJoint.connectedBody = connectedBody;
 
-        float distanceFromPoint = Vector3.Distance(a: pm.gameObject.transform.position, b: grapplePoint);
+        float distanceFromPoint = Vector3.Distance(a: pm.gameObject.transform.position, b: grappleHitPoint.transform.position);
 
         // The distance grapple will try to keep from grapple point. mess with this
         joint.maxDistance = distanceFromPoint * maxJointDistance;
@@ -149,18 +152,17 @@ public class Grappling : MonoBehaviour
         dj.groundCheck.gameObject.SetActive(true);
     }
 
-    private void StopGrapple()
+    public void StopGrapple()
     {
         grappling = false;
         grappleGun.SetActive(false);
         lr.enabled = false;
         Destroy(joint);
+        Destroy(_fixedJoint);
 
         canGrapple = false;
 
         grapplingCdTimeLeft = GrapplingCd;
-        grappleHitPoint.transform.parent = null;
-        gameObject.transform.parent = null;
         StartCoroutine(GrappleCooldown());
     }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Text speedText;
     private float currentSpeed;
     WallRun wr;
+    [Tooltip("Grappling Stops as soon as Player Collides with other Game Objects while grappling.")]
+    [SerializeField] private bool forceStopGrappleOnCollision;
    
     [Header("Sprinting")]
     [SerializeField] float walkSpeed = 4f;
@@ -48,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
     Animator animator;
+    private Grappling _grappling;
 
     RaycastHit slopeHit;
 
@@ -57,6 +61,17 @@ public class PlayerMovement : MonoBehaviour
         rb.freezeRotation = true;
         wr = GetComponent<WallRun>();
         animator = GetComponentInChildren<Animator>();
+
+        _grappling = GetComponent<Grappling>();
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (forceStopGrappleOnCollision && _grappling.grappling)
+        {
+            _grappling.StopGrapple();
+        }
+        
     }
 
     private void Update()
