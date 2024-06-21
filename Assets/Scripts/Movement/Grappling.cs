@@ -130,13 +130,16 @@ public class Grappling : MonoBehaviour
         joint = pm.gameObject.AddComponent<SpringJoint>();
         joint.autoConfigureConnectedAnchor = false;
         joint.connectedAnchor = grappleHitPoint.transform.position;
-        
-        _fixedJoint = pm.gameObject.AddComponent<FixedJoint>();
-        _fixedJoint.autoConfigureConnectedAnchor = true;
-        _fixedJoint.connectedAnchor = grappleHitPoint.transform.position;
-        
-        _fixedJoint.connectedBody = connectedBody;
 
+        if (connectedBody)
+        {
+            _fixedJoint = pm.gameObject.AddComponent<FixedJoint>();
+            _fixedJoint.autoConfigureConnectedAnchor = true;
+            _fixedJoint.connectedAnchor = grappleHitPoint.transform.position;
+        
+            _fixedJoint.connectedBody = connectedBody;    
+        }
+        
         float distanceFromPoint = Vector3.Distance(a: pm.gameObject.transform.position, b: grappleHitPoint.transform.position);
 
         // The distance grapple will try to keep from grapple point. mess with this
